@@ -19,4 +19,5 @@ function digid_theme_customizer_register( $wp_customize ) {
 	require get_parent_theme_file_path( '/inc/customizer/socials.php' );
 
 }
+
 add_action( 'customize_register', 'digid_theme_customizer_register' );

@@ -1,9 +1,4 @@
 <?php
-/**
- * The custom theme tags file.
- */
-
-
 
 /**
  * Get our socials from the theme customizer and display them.

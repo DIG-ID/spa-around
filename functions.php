@@ -41,22 +41,8 @@ function digid_theme_footer_widgets_init() {
 	);
 
 }
+
 add_action( 'widgets_init', 'digid_theme_footer_widgets_init' );
-
-
-/**
- * Add custom classes to posts body
- */
-function custom_body_classes( $classes ) {
-    if ( is_single() ) {
-        global $post;
-        foreach ( ( get_the_category( $post->ID ) ) as $category ) {
-            $classes[] = $category->category_nicename;
-        }
-    }
-    return $classes;
-}
-add_filter( 'body_class', 'custom_body_classes' );
 
 
 /**
