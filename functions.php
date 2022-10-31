@@ -175,16 +175,18 @@ function custom_date_validation( $result, $tag ) {
 
 		if ( $count >= 0 && $count <= 5 ) :
 
-			//global $post;
-			//$author_id = $post->post_author;
+			global $post;
+			$author_id = $post->post_author;
 
 			$appointment_post = array(
 				'post_type'    => 'appointment',
-				'post_title'   => 'Appointment NR:',
+				'post_title'   => 'Appointment: NR:',
 				'post_content' => 'This is my post.',
 				'post_status'  => 'publish',
-				//'post_author'  => $author_id,
-				//'post_date'    => date( get_option( 'date_format' ) ),
+				'post_author'  => $author_id,
+				'meta_input'   => array(
+					'appointment_date' => $appointment_date,
+				),
 			);
 
 			wp_insert_post( $appointment_post, $wp_error );
