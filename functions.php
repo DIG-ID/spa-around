@@ -187,7 +187,7 @@ function custom_date_validation( $result, $tag ) {
 				//'post_date'    => date( get_option( 'date_format' ) ),
 			);
 
-			wp_insert_post( $appointment_post );
+			wp_insert_post( $appointment_post, $wp_error );
 		else :
 				$result->invalidate( $tag, "The appointments are full to this date, please choose another one" );
 		endif;
