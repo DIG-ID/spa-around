@@ -143,8 +143,9 @@ add_filter( 'wpcf7_validate_date', 'custom_date_validation', 20, 2 );
 
 function custom_date_validation( $result, $tag ) {
 
-	if ( 'date' === $tag->name ) :
-		$appointment_date = isset( $_POST['date'] ) ? trim( $_POST['date'] ) : '';
+	echo 'yaya isto funciona';
+	if ( 'appdate' == $tag->name ) :
+		$appointment_date = isset( $_POST['appdate'] ) ? $_POST['appdate'] : '';
 	endif;
 
 	$today_date = gmdate( get_option( 'date_format' ) );
@@ -179,7 +180,7 @@ function custom_date_validation( $result, $tag ) {
 			global $post;
 			$author_id = $post->post_author;
 
-			$appoint_post = array(
+			$appointment_post = array(
 				'post_type'    => 'appointment',
 				'post_title'   => 'Appointment NR:',
 				'post_content' => 'This is my post.',
@@ -188,9 +189,7 @@ function custom_date_validation( $result, $tag ) {
 				'post_date'    => date( get_option( 'date_format' ) ),
 			);
 
-			wp_insert_post( $appoint_post );
-
-			$result->validate( $tag, 'new post was created' );
+			wp_insert_post( $appointment__post );
 		else :
 				$result->invalidate( $tag, 'The appointments are full to this date, please choose another one' );
 		endif;
