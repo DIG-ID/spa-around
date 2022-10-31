@@ -155,7 +155,6 @@ function custom_date_validation( $result, $tag ) {
 				'post_type'      => 'appointment',
 				'post_status '   => 'publish',
 				'posts_per_page' => -1,
-				'meta_key'       => 'appointment_date',
 				'meta_query'     => array(
 					array(
 						'key'     => 'appointment_date',
@@ -165,6 +164,7 @@ function custom_date_validation( $result, $tag ) {
 				),
 			)
 		);
+		var_dump($count);
 		// Loop into all the posts to cout them
 		if ( $count->have_posts() ) :
 			$count = $count->post_count;
