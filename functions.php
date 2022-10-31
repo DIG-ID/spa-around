@@ -132,3 +132,71 @@ require get_template_directory() . '/inc/customizer.php';
 
 // Theme custom template tags.
 require get_template_directory() . '/inc/theme-template-tags.php';
+
+
+
+/**
+ * contact form validaion
+ */
+
+add_filter( 'wpcf7_validate_date', 'custom_date_validation', 20, 2 );
+
+function custom_date_validation( $result, $tag ) {
+
+	if ( 'date' === $tag->name ) :
+		$appointment_date = isset( $_POST['date'] ) ? trim( $_POST['date'] ) : '';
+	endif;
+
+	$today_date = gmdate( get_option( 'date_format' ) );
+	var_dump( $today_date );
+
+	if ( $appointment_date > $today_date) :
+		$count = new WP_Query(
+			array(
+				'post_type'      => 'appointment',
+				'post_status '   => 'publish',
+				'posts_per_page' => -1,
+				'meta_key'       => 'appointment_date',
+				'meta_query'     => array(
+					array(
+						'key'     => 'appointment_date',
+						'value'   => $appointment_date,
+						'compare' => '=',
+					),
+				),
+			)
+		);
+		// Loop into all the posts to cout them
+		if ( $count->have_posts() ) :
+			$count = $count->post_count;
+			wp_reset_postdata();
+		else : 
+			$count = 0;
+		endif;
+
+		if ( $count > 0 && $count <= 5 ) :
+
+			global $post;
+			$author_id = $post->post_author;
+
+			$appoint_post = array(
+				'post_type'    => 'appointment',
+				'post_title'   => 'Appointment NR:',
+				'post_content' => 'This is my post.',
+				'post_status'  => 'publish',
+				'post_author'  => $author_id,
+				'post_date'    => date( get_option( 'date_format' ) ),
+			);
+
+			wp_insert_post( $appoint_post );
+
+			$result->validate( $tag, 'new post was created' );
+		else :
+				$result->invalidate( $tag, 'The appointments are full to this date, please choose another one' );
+		endif;
+	else :
+		$result->invalidate( $tag, 'the date needs to be x' );
+	endif;
+
+	return $result;
+}
