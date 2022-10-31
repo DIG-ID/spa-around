@@ -172,7 +172,7 @@ function custom_date_validation( $result, $tag ) {
 			$count = 0;
 		endif;
 
-		if ( $count > 0 && $count <= 5 ) :
+		if ( $count >= 0 && $count <= 5 ) :
 
 			global $post;
 			$author_id = $post->post_author;
