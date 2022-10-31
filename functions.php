@@ -139,7 +139,7 @@ require get_template_directory() . '/inc/theme-template-tags.php';
  * Contact form validaion
  */
 
-add_filter( 'wpcf7_validate_date', 'custom_date_validation', 20, 2 );
+add_filter( 'wpcf7_validate_date*', 'custom_date_validation', 20, 2 );
 
 function custom_date_validation( $result, $tag ) {
 
