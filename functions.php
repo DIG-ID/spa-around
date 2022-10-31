@@ -64,6 +64,32 @@ function digid_theme_enqueue_styles() {
 
 add_action( 'wp_enqueue_scripts', 'digid_theme_enqueue_styles' );
 
+/**
+ * Remove post type links
+ */
+function digid_remove_posts_type() {
+	remove_menu_page( 'edit.php' );
+}
+
+add_action( 'admin_menu', 'digid_remove_posts_type' );
+
+/**
+ * Remove "quick drafts" post from dashboard
+ */
+function digid_remove_posts_quickdraft() {
+	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+}
+
+add_action( 'admin_bar_menu', 'digid_remove_posts_from_menu', 9999 );
+
+/**
+ * Remove "New post" links
+ */
+function digid_remove_posts_from_menu( $wp_admin_bar ) {
+	$wp_admin_bar->remove_node( 'new-post' );
+}
+
+add_action( 'wp_dashboard_setup', 'digid_remove_posts_quickdraft', 9999 );
 
 // Theme customizer options.
 require get_template_directory() . '/inc/customizer.php';
