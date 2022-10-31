@@ -180,8 +180,8 @@ function custom_date_validation( $result, $tag ) {
 
 			$appointment_post = array(
 				'post_type'    => 'appointment',
-				'post_title'   => 'Appointment: NR:' . $appointment_ID,
-				'post_content' => 'This is my post.',
+				'post_title'   => 'Appointment: NR',
+				'post_content' => 'This is my appointment.',
 				'post_status'  => 'publish',
 				'post_author'  => $author_id,
 				'meta_input'   => array(
@@ -191,10 +191,10 @@ function custom_date_validation( $result, $tag ) {
 
 			wp_insert_post( $appointment_post, $wp_error );
 		else :
-				$result->invalidate( $tag, "The appointments are full to this date, please choose another one" );
+				$result->invalidate( $tag, 'The appointments are full to this date, please choose another one' );
 		endif;
 	else :
-		$result->invalidate( $tag, "the date needs to be x" );
+		$result->invalidate( $tag, 'the date needs to be x' );
 	endif;
 
 	return $result;
