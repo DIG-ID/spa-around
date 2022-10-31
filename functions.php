@@ -65,6 +65,42 @@ function digid_theme_enqueue_styles() {
 add_action( 'wp_enqueue_scripts', 'digid_theme_enqueue_styles' );
 
 /**
+ * Get font face styles.
+ * Called by functions twentytwentytwo_styles() and twentytwentytwo_editor_styles() above.
+ */
+function dig_get_font_face_styles() {
+
+	return "
+		@font-face {
+			font-family:'roc-grotesk';
+			src:url('https://use.typekit.net/af/9ef671/00000000000000007735b7cc/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3') format('woff2'),url('https://use.typekit.net/af/9ef671/00000000000000007735b7cc/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3') format('woff'),url('https://use.typekit.net/af/9ef671/00000000000000007735b7cc/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3') format('opentype');
+			font-display:auto;
+			font-style:normal;
+			font-weight:300;
+			font-stretch:normal;
+		}
+		@font-face {
+			font-family:'roc-grotesk';
+			src:url('https://use.typekit.net/af/5eb19c/00000000000000007735b7d0/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3') format('woff2'),url('https://use.typekit.net/af/5eb19c/00000000000000007735b7d0/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3') format('woff'),url('https://use.typekit.net/af/5eb19c/00000000000000007735b7d0/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3') format('opentype');
+			font-display:auto;
+			font-style:normal;
+			font-weight:500;
+			font-stretch:normal;
+		}
+		@font-face {
+			font-family:'roc-grotesk-wide';
+			src:url('https://use.typekit.net/af/ece23c/00000000000000007735b7ca/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3') format('woff2'),url('https://use.typekit.net/af/ece23c/00000000000000007735b7ca/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3') format('woff'),url('https://use.typekit.net/af/ece23c/00000000000000007735b7ca/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3') format('opentype');
+			font-display:auto;
+			font-style:normal;
+			font-weight:600;
+			font-stretch:normal;
+		}
+
+	";
+
+}
+
+/**
  * Remove post type links
  */
 function digid_remove_posts_type() {
