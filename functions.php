@@ -143,13 +143,11 @@ add_filter( 'wpcf7_validate_date*', 'custom_date_validation', 20, 2 );
 
 function custom_date_validation( $result, $tag ) {
 
-	echo 'yaya isto funciona';
 	if ( 'appdate' == $tag->name ) :
 		$appointment_date = isset( $_POST['appdate'] ) ? $_POST['appdate'] : '';
 	endif;
 
-	$today_date = gmdate( get_option( 'date_format' ) );
-	var_dump( $today_date );
+	$today_date = date( get_option( 'date_format' ) );
 
 	if ( $appointment_date > $today_date ) :
 		$count = new WP_Query(
@@ -191,10 +189,10 @@ function custom_date_validation( $result, $tag ) {
 
 			wp_insert_post( $appointment__post );
 		else :
-				$result->invalidate( $tag, 'The appointments are full to this date, please choose another one' );
+				$result->invalidate( $tag, "The appointments are full to this date, please choose another one" );
 		endif;
 	else :
-		$result->invalidate( $tag, 'the date needs to be x' );
+		$result->invalidate( $tag, "the date needs to be x" );
 	endif;
 
 	return $result;
