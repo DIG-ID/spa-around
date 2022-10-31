@@ -136,7 +136,7 @@ require get_template_directory() . '/inc/theme-template-tags.php';
 
 
 /**
- * contact form validaion
+ * Contact form validaion
  */
 
 add_filter( 'wpcf7_validate_date', 'custom_date_validation', 20, 2 );
@@ -150,7 +150,7 @@ function custom_date_validation( $result, $tag ) {
 	$today_date = gmdate( get_option( 'date_format' ) );
 	var_dump( $today_date );
 
-	if ( $appointment_date > $today_date) :
+	if ( $appointment_date > $today_date ) :
 		$count = new WP_Query(
 			array(
 				'post_type'      => 'appointment',
