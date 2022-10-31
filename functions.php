@@ -190,7 +190,6 @@ function custom_date_validation( $result, $tag ) {
 			);
 
 			wp_insert_post( $appointment_post, $wp_error );
-			$appointment_ID = wp_insert_post( $appointment_post, $wp_error );
 		else :
 				$result->invalidate( $tag, "The appointments are full to this date, please choose another one" );
 		endif;
