@@ -164,7 +164,6 @@ function custom_date_validation( $result, $tag ) {
 				),
 			)
 		);
-		var_dump($count);
 		// Loop into all the posts to cout them
 		if ( $count->have_posts() ) :
 			$count = $count->post_count;
