@@ -101,31 +101,73 @@ function dig_get_font_face_styles() {
 }
 
 /**
- * Remove post type links
+ * Hide native posts from custom role user
  */
-function digid_remove_posts_type() {
-	remove_menu_page( 'edit.php' );
+function digid_hide_posts_from_custom_role() {
+
+	$user = wp_get_current_user();
+	$allowed_roles = array( 'porperty-owner' );
+
+	if ( array_intersect( $allowed_roles, $user->roles ) ) :
+		/**
+		 * Remove post type links
+		 */
+		function digid_remove_posts_type() {
+			remove_menu_page( 'edit.php' );
+		}
+
+		add_action( 'admin_menu', 'digid_remove_posts_type' );
+
+		/**
+		 * Remove "quick drafts" post from dashboard
+		 */
+		function digid_remove_posts_quickdraft() {
+			remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+		}
+
+		add_action( 'admin_bar_menu', 'digid_remove_posts_from_menu', 9999 );
+
+		/**
+		 * Remove "New post" links
+		 */
+		function digid_remove_posts_from_menu( $wp_admin_bar ) {
+			$wp_admin_bar->remove_node( 'new-post' );
+		}
+
+		add_action( 'wp_dashboard_setup', 'digid_remove_posts_quickdraft', 9999 );
+	endif;
+
 }
 
-add_action( 'admin_menu', 'digid_remove_posts_type' );
+/*
+ * Sets the post types that can appear on the homepage.
+ */
+function digid_set_home_post_types( $query ) {
+
+	$is_target_query = ! is_admin() && $query->is_main_query() && $query->is_home;
+
+	if ( $is_target_query ) :
+			$target_types = array( 'post', 'events', 'offer', 'spa', 'property' );
+			$query->set( 'post_type', $target_types );
+	endif;
+}
+
+add_action( 'pre_get_posts', 'digid_set_home_post_types', 10, 1 );
 
 /**
- * Remove "quick drafts" post from dashboard
+ * Helper to debug
+ *
+ * @param [type] $output
+ * @param boolean $with_script_tags
+ * @return void
  */
-function digid_remove_posts_quickdraft() {
-	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+function console_log( $output, $with_script_tags = true ) {
+	$js_code = 'console.log(' . wp_json_encode( $output, JSON_HEX_TAG ) . ');';
+	if ( $with_script_tags ) :
+			$js_code = '<script>' . $js_code . '</script>';
+	endif;
+	echo $js_code;
 }
-
-add_action( 'admin_bar_menu', 'digid_remove_posts_from_menu', 9999 );
-
-/**
- * Remove "New post" links
- */
-function digid_remove_posts_from_menu( $wp_admin_bar ) {
-	$wp_admin_bar->remove_node( 'new-post' );
-}
-
-add_action( 'wp_dashboard_setup', 'digid_remove_posts_quickdraft', 9999 );
 
 // Theme customizer options.
 require get_template_directory() . '/inc/customizer.php';
@@ -133,69 +175,8 @@ require get_template_directory() . '/inc/customizer.php';
 // Theme custom template tags.
 require get_template_directory() . '/inc/theme-template-tags.php';
 
+// Theme custom contact form 7 settings.
+require get_template_directory() . '/inc/contact-form-settings.php';
 
-
-/**
- * Contact form validaion
- */
-
-add_filter( 'wpcf7_validate_date*', 'custom_date_validation', 20, 2 );
-
-function custom_date_validation( $result, $tag ) {
-
-	if ( 'appdate' == $tag->name ) :
-		$appointment_date = isset( $_POST['appdate'] ) ? $_POST['appdate'] : '';
-	endif;
-
-	$today_date = date( get_option( 'date_format' ) );
-
-	if ( $appointment_date > $today_date ) :
-		$count = new WP_Query(
-			array(
-				'post_type'      => 'appointment',
-				'post_status '   => 'publish',
-				'posts_per_page' => -1,
-				'meta_key'       => 'appointment_date',
-				'meta_query'     => array(
-					array(
-						'key'     => 'appointment_date',
-						'value'   => $appointment_date,
-						'compare' => '=',
-					),
-				),
-			)
-		);
-		// Loop into all the posts to cout them
-		if ( $count->have_posts() ) :
-			$count = $count->post_count;
-			wp_reset_postdata();
-		else :
-			$count = 0;
-		endif;
-
-		if ( $count >= 0 && $count <= 5 ) :
-
-			global $post;
-			$author_id = $post->post_author;
-
-			$appointment_post = array(
-				'post_type'    => 'appointment',
-				'post_title'   => 'Appointment: NR',
-				'post_content' => 'This is my appointment.',
-				'post_status'  => 'publish',
-				'post_author'  => $author_id,
-				'meta_input'   => array(
-					'appointment_date' => $appointment_date,
-				),
-			);
-
-			wp_insert_post( $appointment_post, $wp_error );
-		else :
-				$result->invalidate( $tag, 'The appointments are full to this date, please choose another one' );
-		endif;
-	else :
-		$result->invalidate( $tag, 'the date needs to be x' );
-	endif;
-
-	return $result;
-}
+// Theme custom columns.
+require get_template_directory() . '/inc/admin-columns.php';
