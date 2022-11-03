@@ -101,6 +101,17 @@ function dig_get_font_face_styles() {
 }
 
 /**
+ * Changes the class on the custom logo in the header.php
+ */
+function digid_custom_logo_output( $html ) {
+	$html = str_replace( 'custom-logo-link', 'navbar-brand', $html );
+	return $html;
+}
+
+add_filter( 'get_custom_logo', 'digid_custom_logo_output', 10 );
+
+
+/**
  * Hide native posts from custom role user
  */
 function digid_hide_posts_from_custom_role() {
@@ -175,8 +186,11 @@ require get_template_directory() . '/inc/customizer.php';
 // Theme custom template tags.
 require get_template_directory() . '/inc/theme-template-tags.php';
 
+// Theme custom nav menu walker for bootstrap 5.
+require get_template_directory() . '/inc/custom-walker.php';
+
 // Theme custom contact form 7 settings.
-require get_template_directory() . '/inc/contact-form-settings.php';
+//require get_template_directory() . '/inc/contact-form-settings.php';
 
 // Theme custom columns.
-require get_template_directory() . '/inc/admin-columns.php';
+//require get_template_directory() . '/inc/admin-columns.php';

@@ -13,7 +13,6 @@ endif;
 			<div class="col-12">
 				<?php the_title( '<h1>', '</h1>' ); ?>
 				<?php the_content(); ?>
-				<?php echo do_shortcode( esc_attr( get_theme_mod( 'spa_form_shortcode' ) ) ); ?>
 			</div>
 		</div>
 	</article>
