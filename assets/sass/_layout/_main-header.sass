@@ -1,1 +1,70 @@
 #main-header
+  .navbar
+    padding-top: 40px
+    padding-bottom: 30px
+    background-color: transparent
+    .site-branding
+      .navbar-brand
+        display: block
+    .navbar-actions
+      display: flex
+      align-items: center
+      .navbar-toggler
+        position: relative
+        width: 30px
+        height: 30px
+        padding: 0
+        transition-duration: 0.5s
+        outline: none
+        box-shadow: none
+        border: 0
+        &:focus,
+        &:active
+          outline: none
+          box-shadow: none
+          border: 0
+        .icon-left
+          @include navbar-toggler-icon(2px, 15px)
+          &::before
+            @include navbar-toggler-icon-pseudo(2px, 15px, -8px)
+          &::after
+            @include navbar-toggler-icon-pseudo(2px, 15px, 8px)
+          &:hover
+            cursor: pointer
+        .icon-right
+          @include navbar-toggler-icon(2px, 15px)
+          left: 15px
+          &::before
+            @include navbar-toggler-icon-pseudo(2px, 15px, -8px)
+          &::after
+            @include navbar-toggler-icon-pseudo(2px, 15px, 8px)
+        &:not(.collapsed)
+          .icon-left
+            transition-duration: 0.5s
+            background-color: transparent
+            &::before
+              transform: rotateZ(45deg) scaleX(1.4) translate(1px, 1px)
+            &::after
+              transform: rotateZ(-45deg) scaleX(1.4) translate(1px, -1px)
+          .icon-right
+            transition-duration: 0.5s
+            background-color: transparent
+            &::before
+              transform: rotateZ(-45deg) scaleX(1.4) translate(-1px, 1px)
+            &::after
+              transform: rotateZ(45deg) scaleX(1.4) translate(-1px, -1px)
+      .wpml-ls-statics-shortcode_actions
+        margin-left: 20px
+        width: 40px
+        .wpml-ls-item-legacy-dropdown
+          .wpml-ls-item-toggle
+            background-color: transparent
+            border: 0
+            color: #fff
+            &::after
+              right: 0
+            .wpml-ls-native
+              font-family: $roc-grotesk-font
+              font-weight: 500
+              font-size: 16px
+          .wpml-ls-sub-menu

@@ -1,45 +1,31 @@
-.home
-    &__header
-        &-title
-            font-family: $roc-grotesk-wide-font
-            font-size: 36px
-            font-weight: 600
-            color: #ffffff
-            line-height: 32px
-        &-description
-            font-family: $roc-grotesk-font
-            font-size: 14px
-            font-weight: 300
-            color: #ffffff
-    &__row
-        &-img
-            position: relative
-            background-color: #464646
-            min-height: 75vh
-            align-content: center
-        &-img::before
-            content: ""
-            position: absolute
-            top: 0
-            left: 0
-            width: 100%
-            height: 100%
-            background-image: url(/wp-content/uploads/home_header.jpg)
-            background-position: center center
-            background-repeat: no-repeat
-            background-attachment: fixed
-            background-size: cover
-            filter: brightness(0.5)
-    &__col
-        &-header
-            z-index: 9
-            text-align: center
+.page-template-page-home
+  .section-hero
+    position: relative
+    background-color: #464646
+    min-height: 100vh
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    overflow: hidden
+    
+    .section
+      &__title
+        font-family: $roc-grotesk-wide-font
+        font-size: 36px
+        font-weight: 600
+        color: #ffffff
+        line-height: 32px
+      &__description
+        font-family: $roc-grotesk-font
+        font-size: 14px
+        font-weight: 300
+        color: #ffffff
 
 
 /*RESPONSIVE*/
 @include media-breakpoint-down(lg)
-    .home
-        &__row
-            &-img
-                align-content: flex-end
-                min-height: 95vh
+  .page-template-page-home
+    .section-hero
+      align-content: flex-end
+      min-height: 95vh

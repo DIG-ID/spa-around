@@ -1,14 +1,17 @@
 <header id="main-header" class="main-header" itemscope itemtype="http://schema.org/WebSite">
 	<nav class="navbar fixed-top navbar-dark" role="navigation" aria-label="<?php esc_attr_e( 'Main navigation', 'digid' ); ?>">
-		<div class="container-fluid">
+		<div class="container">
 			<div class="site-branding">
 				<?php
 				if ( has_custom_logo() ) :
 					the_custom_logo();
 				endif;
 				?>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
-					<span class="navbar-toggler-icon"></span>
+			</div>
+			<div class="navbar-actions">
+				<button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+					<span class="icon-left"></span>
+					<span class="icon-right"></span>
 				</button>
 				<?php do_action( 'wpml_add_language_selector' ); ?>
 			</div>

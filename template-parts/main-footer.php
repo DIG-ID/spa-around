@@ -1,14 +1,9 @@
-<footer class="main-footer">
-	<div class="footer-content">
-		<div class="custom-container">
-			<div class="row justify-content-between">
-				
-			</div><!-- .row -->
-		</div><!-- .container -->
-	</div><!-- .footer-content -->
-	<div class="footer-copyright">
-		<div class="container">
-			
-		</div><!-- .container -->
-	</div><!-- .footer-bar -->
+<footer id="main-footer" class="main-footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				footer goes here
+			</div>
+		</div><!-- .row -->
+	</div><!-- .container -->
 </footer><!-- #colophon -->
