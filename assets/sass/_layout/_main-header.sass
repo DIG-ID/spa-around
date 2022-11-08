@@ -3,9 +3,16 @@
     padding-top: 40px
     padding-bottom: 30px
     background-color: transparent
+    transition: all 600ms ease-in-out
     .site-branding
       .navbar-brand
         display: block
+        .custom-logo
+          width: 100%
+          object-fit: cover
+          transition: all 600ms ease-in-out
+          path
+            transition: all 600ms ease-in-out
     .navbar-actions
       display: flex
       align-items: center
@@ -54,17 +61,93 @@
             &::after
               transform: rotateZ(45deg) scaleX(1.4) translate(-1px, -1px)
       .wpml-ls-statics-shortcode_actions
-        margin-left: 20px
+        margin-left: 40px
         width: 40px
         .wpml-ls-item-legacy-dropdown
           .wpml-ls-item-toggle
             background-color: transparent
             border: 0
             color: #fff
+            transition: all 600ms ease-in-out
             &::after
-              right: 0
+              display: none
             .wpml-ls-native
               font-family: $roc-grotesk-font
               font-weight: 500
               font-size: 16px
           .wpml-ls-sub-menu
+    .navbar-collapse.collapsing
+      transition: height 600ms ease-in-out
+    .navbar-collapse
+      .navbar-nav
+        min-height: calc( 100vh - 130px )
+        justify-content: center
+        align-items: center
+        .nav-item
+          .nav-link
+            font-family: $roc-grotesk-font
+            font-weight: normal
+            font-size: 36px
+            line-height: 96px
+            letter-spacing: 0.36px
+            color: #fff
+  .navbar.nav-open
+    background-color: $main-color
+    transition: background-color 600ms ease-in-out
+    .navbar-collapse
+      .navbar-nav
+        min-height: calc( 100vh - 90px )
+
+
+
+#main-header.sticky
+  .navbar:not(.nav-open)
+    padding-top: 15px
+    padding-bottom: 15px
+    background-color: #fff
+    box-shadow: 0px -1px 4px 0px rgb(0 0 0 / 20%)
+    .site-branding
+      .navbar-brand
+        .custom-logo
+          width: 90%
+          path
+            fill: $main-color !important
+    .navbar-actions
+      .navbar-toggler
+        .icon-left,
+        .icon-right
+          background-color: #fff
+          &::before,
+          &::after
+            background-color: $main-color
+          &:not(.collapsed)
+            background-color: $main-color
+      .wpml-ls-statics-shortcode_actions
+        .wpml-ls-item-legacy-dropdown
+          .wpml-ls-item-toggle
+            color: $main-color
+  .navbar.nav-open
+    padding-top: 15px
+    padding-bottom: 15px
+    .site-branding
+      .navbar-brand
+        .custom-logo
+          width: 90%
+          path
+            fill: #fff !important
+    .navbar-actions
+      .navbar-toggler
+        .icon-left,
+        .icon-right
+          background-color: transparent
+          &::before,
+          &::after
+            background-color: #fff
+      .wpml-ls-statics-shortcode_actions
+        .wpml-ls-item-legacy-dropdown
+          .wpml-ls-item-toggle
+            color: #fff
+
+/*body:has(.navbar-collapse.collapse.show)
+  height: 100vh
+  overflow-y: hidden*/
