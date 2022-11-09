@@ -1,19 +1,24 @@
 .page-template-page-home
   .section-hero
     position: relative
-    background-color: #464646
     min-height: 100vh
     display: flex
     flex-direction: column
     justify-content: center
     align-items: center
     overflow: hidden
+    background-color: #464646
     &__title
       font-size: 48px
       margin-bottom: 40px
+      color: #fff
     &__description
+      font-size: 16px
+      letter-spacing: 0.98px
       margin-bottom: 100px
+      color: #fff
     &__btn
+      position: relative
       background-color: $main-color
       width: 60px
       height: 60px
@@ -21,23 +26,52 @@
       display: flex
       justify-content: center
       align-items: center
-      svg
-        margin-top: 9px
+      animation: pulse-down-animation 2s infinite alternate
+      
+      &::before
+        content: ''
         display: block
-    
-    .section
-      &__title
-        font-family: $roc-grotesk-wide-font
-        font-size: 36px
-        font-weight: 600
-        color: #ffffff
-        line-height: 32px
-      &__description
-        font-family: $roc-grotesk-font
-        font-size: 14px
-        font-weight: 300
-        color: #ffffff
+        position: absolute
+        top: 0
+        left: 0
+        width: 60px
+        height: 60px
+        border-radius: 100%
+        animation: pulse-animation 2s infinite
+        z-index: 0
+      svg
+        transform: translateY(8px)
 
+  .section-about
+    padding-top: 90px
+    padding-bottom: 300px
+    background:
+      color: $main-color
+      image: url( '../../imgs/mountains-bg.svg' )
+      position: center 300px
+      repeat: no-repeat
+      size: cover
+    &__title
+      margin-bottom: 40px
+    p
+      font-family: $roc-grotesk-font
+      font-size: 16px
+      font-weight: 300
+      line-height: 26px
+      letter-spacing: 0.56px
+      color: #fff
+
+
+@keyframes pulse-down-animation
+  0% 
+    transform: translateY(0px)
+  100% 
+    transform: translateY(10px)
+@keyframes pulse-animation
+  0% 
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2)
+  100% 
+    box-shadow: 0 0 0 20px rgba(0, 0, 0, 0)
 
 /*RESPONSIVE*/
 @include media-breakpoint-down(lg)
