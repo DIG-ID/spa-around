@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h1 class="section__title section-about__title"><?php the_field( 'about_title' ); ?></h1>
+				<h2 class="section__title section-about__title"><?php the_field( 'about_title' ); ?></h2>
 			</div>
 		</div>
 		<div class="row">

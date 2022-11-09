@@ -6,7 +6,10 @@ function digid_theme_setup() {
 
 	register_nav_menus(
 		array(
-			'main' => __( 'Main Menu', 'digid' ),
+			'main'       => __( 'Main Menu', 'digid' ),
+			'footer'     => __( 'Footer Menu', 'digid' ),
+			'copyrights' => __( 'Copyrights Menu', 'digid' ),
+			'contacts'   => __( 'Contacts Menu', 'digid' ),
 		)
 	);
 
