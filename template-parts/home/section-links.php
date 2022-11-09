@@ -11,10 +11,16 @@
 				while ( have_rows( 'links_links' ) ) :
 					the_row();
 					?>
-					<a href="<?php the_sub_field( 'link_url' ); ?>" class="card card-link col-12 col-md-4">
-						<h3><?php the_sub_field( 'link_title' ); ?></h3>
-						<?php echo wp_get_attachment_image( get_sub_field( 'link_image' ), 'full' ); ?>
-					</a>
+					<article class="col-12 col-md-4">
+						<a href="<?php the_sub_field( 'link_url' ); ?>" class="card card-link">
+							<figure>
+								<?php echo wp_get_attachment_image( get_sub_field( 'link_image' ), 'full' ); ?>
+								<figcaption>
+									<h3><?php the_sub_field( 'link_title' ); ?></h3>
+								</figcaption>
+							</figure>
+						</a>
+					</article>
 					<?php
 				endwhile;
 			endif;

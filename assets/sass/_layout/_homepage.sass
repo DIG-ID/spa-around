@@ -15,11 +15,12 @@
     &__description
       font-size: 16px
       letter-spacing: 0.98px
-      margin-bottom: 100px
       color: #fff
     &__btn
-      position: relative
-      background-color: $main-color
+      position: absolute
+      bottom: 100px
+      left: 50%
+      transform: translateX(-50%)
       width: 60px
       height: 60px
       border-radius: 100%
@@ -27,7 +28,8 @@
       justify-content: center
       align-items: center
       animation: pulse-down-animation 2s infinite alternate
-      
+      transition: background-color .6s ease-in-out
+      background-color: $main-color
       &::before
         content: ''
         display: block
@@ -41,16 +43,35 @@
         z-index: 0
       svg
         transform: translateY(8px)
+        path
+          transition: fill .6s ease-in-out
+      &:hover
+        background-color: $accent-color
+        svg
+          path
+            fill: #fff !important
 
   .section-about
+    position: relative
     padding-top: 90px
     padding-bottom: 300px
-    background:
-      color: $main-color
-      image: url( '../../imgs/mountains-bg.svg' )
-      position: center 300px
-      repeat: no-repeat
-      size: cover
+    background: $main-color
+    background: linear-gradient(90deg, rgba(6,149,109,1) 0%, rgba(3,114,83,1) 100%)
+    z-index: 1
+    &::after
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      display: block
+      z-index: -1
+      background:
+        image: url( '../../imgs/mountains-bg.svg' )
+        position: center 300px
+        repeat: no-repeat
+        size: cover
     &__title
       margin-bottom: 40px
     p
@@ -64,7 +85,7 @@
   .section-links
     padding-top: 80px
     padding-bottom: 40px
-    
+
 
 @keyframes pulse-down-animation
   0% 
