@@ -1,24 +1,41 @@
 #main-footer
-  padding-top: 70px
-  padding-bottom: 70px
-  background-color: $dark-color
-  .footer-logo
-    width: 80%
-    max-width: 100%
-
-  .footer-nav
-    list-style: none
-    padding-left: 0
-    margin-bottom: 0
-    .menu-item
+  .footer-content
+    padding-top: 70px
+    padding-bottom: 70px
+    background-color: $dark-color
+    .footer-logo
+      width: 80%
+      max-width: 100%
+    .footer-nav
+      list-style: none
+      padding-left: 0
+      margin-bottom: 0
+      .menu-item
+        a
+          text-decoration: none
+          color: #fff
+          font-family: $roc-grotesk-font
+          font-size: 16px
+          font-weight: 300
+          line-height: 32px
+          letter-spacing: 0.16px
+          transition: color .4s ease-in-out
+          &:hover
+            color: $accent-color
+  .footer-copyright
+    padding-top: 10px
+    padding-bottom: 10px
+    background-color: darken($dark-color, 1%)
+    .copyright,
+    .developed-by
+      font-size: 12px
+      color: #455e58
+      margin-bottom: 0px
       a
         text-decoration: none
-        color: #fff
-        font-family: $roc-grotesk-font
-        font-size: 16px
-        font-weight: 300
-        line-height: 32px
-        letter-spacing: 0.16px
-        transition: color .4s ease-in-out
+        color: #455e58
+        transition: color .4 ease-in-out
         &:hover
-          color: $main-color
+          color: $accent-color
+    .developed-by
+      text-align: right
