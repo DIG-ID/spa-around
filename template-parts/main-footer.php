@@ -39,4 +39,24 @@
 			</div>
 		</div><!-- .row -->
 	</div><!-- .container -->
-</footer><!-- #colophon -->
+	<div class="container">
+		<div class="row justify-content-between">
+			<div class="col-12 col-md-3">
+				<p class="copyright">
+					<?php
+					$y = date( 'Y' );
+					printf(
+						/* translators: %s: WordPress. */
+						esc_html__( '%d &copy; All rights reserved by %s', 'digid' ),
+						esc_html( $y ),
+						'<a href="' . esc_url( __( 'https://dig.id/', 'digid' ) ) . '">dig.id</a>'
+					);
+					?>
+				</p>
+			</div>
+			<div class="col col-md-3">
+				
+			</div>
+		</div>
+	</div>
+</footer>
