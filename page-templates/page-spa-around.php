@@ -8,5 +8,6 @@ get_header();
 	get_template_part( 'template-parts/page/page', 'header' );
 	get_template_part( 'template-parts/page/page', 'title' );
 	get_template_part( 'template-parts/spa-around/section', 'intro' );
+	get_template_part( 'template-parts/spa-around/section', 'item-list' );
 	do_action( 'after_main_content' );
 get_footer();
