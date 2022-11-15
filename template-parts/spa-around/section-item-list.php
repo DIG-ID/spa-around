@@ -5,25 +5,23 @@
                 <p class="spa__filter-title"><?php _e('Filter', 'spa-around') ?></p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <p class="spa__filter-name"><?php _e('Location', 'spa-around') ?></p>
-            </div>
-        </div>
 		<div class="row">
+			<div class="col-12">
+                <p class="spa__filter-name"><?php _e('Infrastructure', 'spa-around') ?></p>
+            </div>
             <div class="col-12">
                 <div class="button-group spa__filter-button-group">
-                <button class="spa__filter-button" data-filter="*">All</button>
-                <?php 
-                $spa_allterms = get_terms( 'infrastructure', array('hide_empty' => true) ); 
-                if ( $spa_allterms && ! is_wp_error( $spa_allterms ) ) :
-                    foreach ( $spa_allterms as $spa_allterm ) :
-                        $spa_infrastructure_slug = $spa_allterm->slug;
-                        $spa_infrastructure = $spa_allterm->name;
-                        echo '<button class="spa__filter-button" data-filter=".' . esc_attr( $spa_infrastructure_slug ) . '">' . esc_html( $spa_infrastructure ) . '</button>';
-                    endforeach;
-                endif;
-                ?>
+					<button class="spa__filter-button" data-filter="*">All</button>
+					<?php 
+					$spa_allterms = get_terms( 'infrastructure', array('hide_empty' => true) ); 
+					if ( $spa_allterms && ! is_wp_error( $spa_allterms ) ) :
+						foreach ( $spa_allterms as $spa_allterm ) :
+							$spa_infrastructure_slug = $spa_allterm->slug;
+							$spa_infrastructure = $spa_allterm->name;
+							echo '<button class="spa__filter-button" data-filter=".' . esc_attr( $spa_infrastructure_slug ) . '">' . esc_html( $spa_infrastructure ) . '</button>';
+						endforeach;
+					endif;
+					?>
                 </div>
             </div>
 		</div>
