@@ -10,15 +10,14 @@
                 <p class="spa__filter-name"><?php _e('Infrastructure', 'spa-around') ?></p>
             </div>
             <div class="col-12">
-                <div class="button-group spa__filter-button-group">
-					<button class="spa__filter-button" data-filter="*">All</button>
+                <div class="button-group spa__filter-button-group filters">
 					<?php 
 					$spa_allterms = get_terms( 'infrastructure', array('hide_empty' => true) ); 
 					if ( $spa_allterms && ! is_wp_error( $spa_allterms ) ) :
 						foreach ( $spa_allterms as $spa_allterm ) :
 							$spa_infrastructure_slug = $spa_allterm->slug;
 							$spa_infrastructure = $spa_allterm->name;
-							echo '<button class="spa__filter-button" data-filter=".' . esc_attr( $spa_infrastructure_slug ) . '">' . esc_html( $spa_infrastructure ) . '</button>';
+							echo '<a class="spa__filter-button" data-filter=".' . esc_attr( $spa_infrastructure_slug ) . '"><span>X</span>' . esc_html( $spa_infrastructure ) . '</a>';
 						endforeach;
 					endif;
 					?>
@@ -69,15 +68,43 @@
 <script type="text/javascript">
 	(function( $ ) {
 		$(document).on( 'ready', function() {
-			$('.spa__filter-button-group').on( 'click', 'button', function() {
-			var filterValue = $(this).attr('data-filter');
-			$grid.isotope({ filter: filterValue });
+			// init Isotope
+			var $grid = $('.grid-spa').isotope({
+			itemSelector: '.grid-spa-item',
+			layoutMode: 'fitRows'
 			});
 
-			var $grid = $(".grid-spa").isotope({
-				itemSelector: '.grid-spa-item',
-				layoutMode: 'fitRows'
+			// store filter for each group
+			var filters = [];
+
+			// change is-checked class on buttons
+			$('.filters').on( 'click', 'a', function( event ) {
+			var $target = $( event.currentTarget );
+			$target.toggleClass('is-checked');
+			var isChecked = $target.hasClass('is-checked');
+			var filter = $target.attr('data-filter');
+			if ( isChecked ) {
+				addFilter( filter );
+			} else {
+				removeFilter( filter );
+			}
+			// filter isotope
+			// group filters together, inclusive
+			$grid.isotope({ filter: filters.join(',') });
 			});
+			
+			function addFilter( filter ) {
+			if ( filters.indexOf( filter ) == -1 ) {
+				filters.push( filter );
+			}
+			}
+
+			function removeFilter( filter ) {
+			var index = filters.indexOf( filter);
+			if ( index != -1 ) {
+				filters.splice( index, 1 );
+			}
+			}
 		});
 	})(jQuery);
 </script>

@@ -10,15 +10,14 @@
                 <p class="offer__filter-name"><?php _e('Category', 'spa-around') ?></p>
             </div>
 			<div class="col-12">
-				<div class="button-group offer__filter-button-group">
-					<button class="offer__filter-button" data-filter="*">All</button>
+				<div class="button-group offer__filter-button-group filters">
 					<?php 
 					$offer_allterms = get_terms( 'category', array('hide_empty' => true) ); 
 					if ( $offer_allterms && ! is_wp_error( $offer_allterms ) ) :
 						foreach ( $offer_allterms as $offer_allterm ) :
 							$offer_category_slug = $offer_allterm->slug;
 							$offer_category = $offer_allterm->name;
-							echo '<button class="offer__filter-button" data-filter=".' . esc_attr( $offer_category_slug ) . '">' . esc_html( $offer_category ) . '</button>';
+							echo '<a class="offer__filter-button" data-filter=".' . esc_attr( $offer_category_slug ) . '"><span>X</span>' . esc_html( $offer_category ) . '</a>';
 						endforeach;
 					endif;
 					?>
@@ -69,15 +68,43 @@
 <script type="text/javascript">
 	(function( $ ) {
 		$(document).on( 'ready', function() {
-			$('.offer__filter-button-group').on( 'click', 'button', function() {
-			var filterValue = $(this).attr('data-filter');
-			$grid.isotope({ filter: filterValue });
+			// init Isotope
+			var $grid = $('.grid-offer').isotope({
+			itemSelector: '.grid-offer-item',
+			layoutMode: 'fitRows'
 			});
 
-			var $grid = $(".grid-offer").isotope({
-				itemSelector: '.grid-offer-item',
-				layoutMode: 'fitRows'
+			// store filter for each group
+			var filters = [];
+
+			// change is-checked class on buttons
+			$('.filters').on( 'click', 'a', function( event ) {
+			var $target = $( event.currentTarget );
+			$target.toggleClass('is-checked');
+			var isChecked = $target.hasClass('is-checked');
+			var filter = $target.attr('data-filter');
+			if ( isChecked ) {
+				addFilter( filter );
+			} else {
+				removeFilter( filter );
+			}
+			// filter isotope
+			// group filters together, inclusive
+			$grid.isotope({ filter: filters.join(',') });
 			});
+			
+			function addFilter( filter ) {
+			if ( filters.indexOf( filter ) == -1 ) {
+				filters.push( filter );
+			}
+			}
+
+			function removeFilter( filter ) {
+			var index = filters.indexOf( filter);
+			if ( index != -1 ) {
+				filters.splice( index, 1 );
+			}
+			}
 		});
 	})(jQuery);
 </script>

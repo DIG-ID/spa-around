@@ -7,13 +7,23 @@
             border: 2px solid #DBDBDB
             border-radius: 20px
             background-color: #ffffff
-            padding: 8px 15px
+            padding: 10px 15px
             margin-right: 10px
+            text-decoration: none
+            cursor: pointer
             &-group
                 margin-bottom: 50px
             &:hover
                 color: $main-color
                 border-color: $main-color
+            &.is-checked
+                color: $main-color
+                border-color: $main-color
+                span
+                    display: inline
+            span
+                padding-right: 10px
+                display: none
         &-title
             font-family: $roc-grotesk-font
             font-size: 16px
