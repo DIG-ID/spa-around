@@ -72,3 +72,19 @@ function digid_get_header_banner() {
 
 	echo esc_url( $img );
 }
+
+
+/**
+ * Get custom post meta
+ */
+function digid_get_post_meta() {
+
+	if ( is_singular( 'spa' ) ) :
+
+	endif;
+	if ( is_singular( 'offer' ) ) :
+	endif;
+
+}
+
+add_action( 'get_post_meta', 'digid_get_post_meta' );
