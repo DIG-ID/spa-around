@@ -10,7 +10,7 @@
 				<?php
 				$infrastructures = get_the_terms( get_the_ID(), 'infrastructure' );
 				if ( ! empty( $infrastructures ) ) :
-					echo '<ul>';
+					echo '<ul class="infrastructure-list">';
 					foreach ( $infrastructures as $structure ) :
 						echo '<li>' . $structure->name . '</li>';
 					endforeach;

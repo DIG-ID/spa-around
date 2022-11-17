@@ -21,7 +21,7 @@
 					$parent_pod = pods( 'property', $parent['ID'] );
 					$offers     = $parent_pod->field( array( 'name' => 'property_offers', 'output' => 'objects' ) );
 					if ( ! empty( $offers ) ) :
-						echo '<div class="swiper related-offers-swiper"> <div class="swiper-wrapper">';
+						echo '<div class="swiper related-offers-swiper"> <div class="row swiper-wrapper">';
 						foreach ( $offers as $post ) :
 							setup_postdata( $post );
 							get_template_part( 'template-parts/loops/loop', 'related-offers' );
