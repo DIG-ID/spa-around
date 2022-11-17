@@ -13,7 +13,7 @@
                 <p class="spa__filter-name"><?php _e('Infrastructure', 'spa-around') ?></p>
             </div>
             <div class="col-12 col-lg-4">
-				<div class="button-group spa__filter-button-group filters">
+				<div class="button-group spa__filter-button-group filters" data-filter-group="location">
 					<?php 
 						$spa_locationterms = get_terms( 'location', array('hide_empty' => false) ); 
 						if ( $spa_locationterms && ! is_wp_error( $spa_locationterms ) ) :
@@ -27,7 +27,7 @@
                 </div>
             </div>
 			<div class="col-12 col-lg-8">
-				<div class="button-group spa__filter-button-group filters">
+				<div class="button-group spa__filter-button-group filters" data-filter-group="infrastructure">
 					<?php 
 					$spa_allterms = get_terms( 'infrastructure', array('hide_empty' => true) ); 
 					if ( $spa_allterms && ! is_wp_error( $spa_allterms ) ) :
@@ -62,22 +62,15 @@
 				$parent_id = $parent['ID'];
 				$parent_terms = get_the_terms( $parent_id, 'location' );
 				$parent_locations = array();
-				if ( $parent_terms && ! is_wp_error( $parent_terms ) ) :
-					foreach ( $parent_terms as $pterm ) :
-						$parent_locations[] = $pterm->slug;
+				$filter_classes = array_merge($parent_terms,$spa_terms);
+				if ( $filter_classes && ! is_wp_error( $filter_classes ) ) :
+					foreach ( $filter_classes as $fterm ) :
+						$parent_locations[] = $fterm->slug;
 					endforeach;
+				
 				$parent_location = join( " ", $parent_locations );
-				endif;
 			?>
-			<?php
-			$spa_infrastructures = array();
-			if ( $spa_terms && ! is_wp_error( $spa_terms ) ) :
-				foreach ( $spa_terms as $spa_term ) :
-					$spa_infrastructures[] = $spa_term->slug;
-				endforeach;
-				$spa_infrastructure = join( " ", $spa_infrastructures ); 
-			?>
-			<article class="col-12 col-md-4 grid-spa-item <?php echo esc_html( $spa_infrastructure ); ?> <?php echo esc_html( $parent_location ); ?>">
+			<article class="col-12 col-md-4 grid-spa-item <?php echo esc_html( $parent_location ); ?>">
 			<?php endif; ?>
 				<a href="<?php the_permalink(); ?>" class="card card-link">
 					<figure>
@@ -106,10 +99,8 @@
 			itemSelector: '.grid-spa-item',
 			layoutMode: 'fitRows'
 			});
-
 			// store filter for each group
 			var filters = [];
-
 			// change is-checked class on buttons
 			$('.filters').on( 'click', 'a', function( event ) {
 			var $target = $( event.currentTarget );
@@ -121,17 +112,13 @@
 			} else {
 				removeFilter( filter );
 			}
-			// filter isotope
-			// group filters together, inclusive
-			$grid.isotope({ filter: filters.join(',') });
+			$grid.isotope({ filter: filters.join('') });
 			});
-			
 			function addFilter( filter ) {
 			if ( filters.indexOf( filter ) == -1 ) {
 				filters.push( filter );
 			}
 			}
-
 			function removeFilter( filter ) {
 			var index = filters.indexOf( filter);
 			if ( index != -1 ) {
