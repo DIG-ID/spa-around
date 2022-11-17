@@ -45,33 +45,19 @@ function theme_after_main_content() {
 add_action( 'after_main_content', 'theme_after_main_content' );
 
 /**
- * Select the bnner for the header.
+ * Select the banner for the header.
  */
 function digid_get_header_banner() {
-	$img = '';
-	if ( is_page_template() ) :
-		if ( has_post_thumbnail() ) :
-			$img = get_the_post_thumbnail_url( 'banner-header' );
-		else :
-			if ( is_page_template( 'page-templates/page-events.php' ) ) :
-				$img = get_template_directory_uri() . '/assets/imgs/default-header.jpg';
-			elseif ( is_page_template( 'page-templates/page-offers.php' ) ) :
-				$img = get_template_directory_uri() . '/assets/imgs/default-header.jpg';
-			elseif ( is_page_template( 'page-templates/page-spa-around.php' ) ) :
-				$img = get_template_directory_uri() . '/assets/imgs/default-header.jpg';
-			elseif ( is_page_template( 'page-templates/page-about.php' ) ) :
-				$img = get_template_directory_uri() . '/assets/imgs/default-header.jpg';
-			endif;
-		endif;
-		echo esc_url( $img );
+	$banner_img = '';
+	if ( has_post_thumbnail() ) :
+		$banner_img = get_the_post_thumbnail_url( get_the_ID(), 'banner-header' );
 	else :
-		if ( has_post_thumbnail() ) :
-			$img = get_the_post_thumbnail_url( 'banner-header' );
-		endif;
+		$banner_img = get_template_directory_uri() . '/assets/imgs/default-header.jpg';
 	endif;
-
-	echo esc_url( $img );
+	echo esc_url( $banner_img );
 }
+
+add_action( 'get_header_banner', 'digid_get_header_banner' );
 
 
 /**
