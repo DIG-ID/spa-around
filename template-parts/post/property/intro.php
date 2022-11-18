@@ -1,7 +1,7 @@
-<section class="section section-spa-intro">
+<section class="section section-intro-single section-intro-property">
 	<div class="container">
 		<div class="row">
-			<div class="col-12 col-md-5">
+			<div class="col-12 col-md-5 description property-description">
 				description and book button
 			</div>
 			<div class="col-12 col-md-7">

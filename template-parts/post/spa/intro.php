@@ -1,7 +1,7 @@
-<section class="section section-spa-intro">
+<section class="section section-intro-single section-intro-spa">
 	<div class="container">
 		<div class="row justify-content-between">
-			<div class="col-12 col-md-4 spa-descrition">
+			<div class="col-12 col-md-4 description spa-descrition">
 				<?php the_field( 'spa_details_description' ); ?>
 				<?php $booking_form = get_field( 'spa_details_booking_shortcode' ); ?>
 				<?php if ( $booking_form ) : ?>
