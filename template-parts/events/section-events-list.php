@@ -5,6 +5,25 @@
                 <p class="event__filter-title"><?php _e('Filter', 'spa-around') ?></p>
             </div>
         </div>
+		<div class="row">
+			<div class="col-12 col-lg-12">
+                <p class="spa__filter-name"><?php _e('Location', 'spa-around') ?></p>
+            </div>
+			<div class="col-12 col-lg-12">
+				<div class="button-group spa__filter-button-group filters" data-filter-group="location">
+					<?php 
+						$event_locationterms = get_terms( 'location', array('hide_empty' => false) ); 
+						if ( $event_locationterms && ! is_wp_error( $event_locationterms ) ) :
+							foreach ( $event_locationterms as $event_locationterm ) :
+								$event_location_slug = $event_locationterm->slug;
+								$event_location = $event_locationterm->name;
+								echo '<a class="spa__filter-button" data-filter=".' . esc_attr( $event_location_slug ) . '"><span>X</span>' . esc_html( $event_location ) . '</a>';
+							endforeach;
+						endif;
+					?>
+                </div>
+			</div>
+		</div>
 		<div class="row grid-event">
 			<?php
 			$event_query_args = array(
@@ -18,8 +37,21 @@
 				while ( $event_query->have_posts() ) :
 				$event_query->the_post();
 				?>
-				
-				<article class="col-12 col-md-4 grid-event-item">
+				<?php 
+				$parent_locations = array();
+				$pod    = pods( 'event', get_the_id() );
+				$parent = $pod->field( 'property' );
+				if ( ! empty( $parent ) ) :
+					$parent_id = $parent['ID'];
+					$parent_terms = get_the_terms( $parent_id, 'location' );
+					if ( $parent_terms && ! is_wp_error( $parent_terms ) ) :
+						foreach ( $parent_terms as $pterm ) :
+							$parent_locations[] = $pterm->slug;
+						endforeach;
+					$parent_location = join( " ", $parent_locations );
+					endif;
+				endif; ?>
+				<article class="col-12 col-md-4 grid-event-item <?php echo esc_html( $parent_location ); ?>">
 					<a href="<?php the_permalink(); ?>" class="card card-link">
 						<figure>
 							<?php if ( has_post_thumbnail() ) : ?>
@@ -40,12 +72,39 @@
 </section>
 
 <script type="text/javascript">
-	(function( $ ) {
-		$(document).on( 'ready', function() {
-			var $grid = $(".grid-event").isotope({
-				itemSelector: '.grid-event-item',
-				layoutMode: 'fitRows'
-			});
+(function( $ ) {
+	$(document).on( 'ready', function() {
+		// init Isotope
+		var $grid = $('.grid-event').isotope({
+		itemSelector: '.grid-event-item',
+		layoutMode: 'fitRows'
 		});
-	})(jQuery);
+		// store filter for each group
+		var filters = [];
+		// change is-checked class on buttons
+		$('.filters').on( 'click', 'a', function( event ) {
+		var $target = $( event.currentTarget );
+		$target.toggleClass('is-checked');
+		var isChecked = $target.hasClass('is-checked');
+		var filter = $target.attr('data-filter');
+		if ( isChecked ) {
+			addFilter( filter );
+		} else {
+			removeFilter( filter );
+		}
+		$grid.isotope({ filter: filters.join('') });
+		});
+		function addFilter( filter ) {
+		if ( filters.indexOf( filter ) == -1 ) {
+			filters.push( filter );
+		}
+		}
+		function removeFilter( filter ) {
+		var index = filters.indexOf( filter);
+		if ( index != -1 ) {
+			filters.splice( index, 1 );
+		}
+		}
+	});
+})(jQuery);
 </script>

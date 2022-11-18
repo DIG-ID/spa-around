@@ -6,11 +6,28 @@
             </div>
         </div>
 		<div class="row">
-			<div class="col-12">
+			<div class="col-12 col-lg-4">
+                <p class="spa__filter-name"><?php _e('Location', 'spa-around') ?></p>
+            </div>
+			<div class="col-12 col-lg-8">
                 <p class="offer__filter-name"><?php _e('Category', 'spa-around') ?></p>
             </div>
-			<div class="col-12">
-				<div class="button-group offer__filter-button-group filters">
+			<div class="col-12 col-lg-4">
+				<div class="button-group spa__filter-button-group filters" data-filter-group="location">
+					<?php 
+						$offer_locationterms = get_terms( 'location', array('hide_empty' => false) ); 
+						if ( $offer_locationterms && ! is_wp_error( $offer_locationterms ) ) :
+							foreach ( $offer_locationterms as $offer_locationterm ) :
+								$offer_location_slug = $offer_locationterm->slug;
+								$offer_location = $offer_locationterm->name;
+								echo '<a class="spa__filter-button" data-filter=".' . esc_attr( $offer_location_slug ) . '"><span>X</span>' . esc_html( $offer_location ) . '</a>';
+							endforeach;
+						endif;
+					?>
+                </div>
+			</div>
+			<div class="col-12 col-lg-8">
+				<div class="button-group offer__filter-button-group filters" data-filter-group="category">
 					<?php 
 					$offer_allterms = get_terms( 'category', array('hide_empty' => true) ); 
 					if ( $offer_allterms && ! is_wp_error( $offer_allterms ) ) :
@@ -37,15 +54,24 @@
 				while ( $offer_query->have_posts() ) :
 				$offer_query->the_post();
 				?>
-				<?php $offer_terms = get_the_terms( $post->ID, 'category' ); ?>
-				<?php $offer_categorys = array();
-						if ( $offer_terms && ! is_wp_error( $offer_terms ) ) :
-						foreach ( $offer_terms as $offer_term ) {
-							$offer_categorys[] = $offer_term->slug;
-						} 
-						$offer_category = join( " ", $offer_categorys ); ?>
-				<article class="col-12 col-md-4 grid-offer-item <?php echo esc_html( $offer_category ); ?>">
-					<?php endif; ?>
+				<?php 
+				$parent_locations = array();				
+				$pod    = pods( 'offer', get_the_id() );
+				$parent = $pod->field( 'property' );
+				if ( ! empty( $parent ) ) :
+					$parent_id = $parent['ID'];
+					$parent_terms = get_the_terms( $parent_id, 'location' );
+					$offer_terms = get_the_terms( $post->ID, 'category' );
+					$filter_classes = array_merge($parent_terms,$offer_terms);
+					if ( $filter_classes && ! is_wp_error( $filter_classes ) ) :
+						foreach ( $filter_classes as $fterm ) :
+							$parent_locations[] = $fterm->slug;
+						endforeach;
+					$parent_location = join( " ", $parent_locations );
+					endif;
+				endif; ?>
+				<article class="col-12 col-md-4 grid-offer-item <?php echo esc_html( $parent_location ); ?>">
+					
 					<a href="<?php the_permalink(); ?>" class="card card-link">
 						<figure>
 							<?php if ( has_post_thumbnail() ) : ?>
@@ -67,44 +93,38 @@
 
 <script type="text/javascript">
 	(function( $ ) {
-		$(document).on( 'ready', function() {
-			// init Isotope
-			var $grid = $('.grid-offer').isotope({
-			itemSelector: '.grid-offer-item',
-			layoutMode: 'fitRows'
-			});
-
-			// store filter for each group
-			var filters = [];
-
-			// change is-checked class on buttons
-			$('.filters').on( 'click', 'a', function( event ) {
-			var $target = $( event.currentTarget );
-			$target.toggleClass('is-checked');
-			var isChecked = $target.hasClass('is-checked');
-			var filter = $target.attr('data-filter');
-			if ( isChecked ) {
-				addFilter( filter );
-			} else {
-				removeFilter( filter );
-			}
-			// filter isotope
-			// group filters together, inclusive
-			$grid.isotope({ filter: filters.join(',') });
-			});
-			
-			function addFilter( filter ) {
-			if ( filters.indexOf( filter ) == -1 ) {
-				filters.push( filter );
-			}
-			}
-
-			function removeFilter( filter ) {
-			var index = filters.indexOf( filter);
-			if ( index != -1 ) {
-				filters.splice( index, 1 );
-			}
-			}
-		});
-	})(jQuery);
+$(document).on( 'ready', function() {
+	// init Isotope
+	var $grid = $('.grid-offer').isotope({
+	itemSelector: '.grid-offer-item',
+	layoutMode: 'fitRows'
+	});
+	// store filter for each group
+	var filters = [];
+	// change is-checked class on buttons
+	$('.filters').on( 'click', 'a', function( event ) {
+	var $target = $( event.currentTarget );
+	$target.toggleClass('is-checked');
+	var isChecked = $target.hasClass('is-checked');
+	var filter = $target.attr('data-filter');
+	if ( isChecked ) {
+		addFilter( filter );
+	} else {
+		removeFilter( filter );
+	}
+	$grid.isotope({ filter: filters.join('') });
+	});
+	function addFilter( filter ) {
+	if ( filters.indexOf( filter ) == -1 ) {
+		filters.push( filter );
+	}
+	}
+	function removeFilter( filter ) {
+	var index = filters.indexOf( filter);
+	if ( index != -1 ) {
+		filters.splice( index, 1 );
+	}
+	}
+});
+})(jQuery);
 </script>

@@ -55,23 +55,24 @@
 			$spa_query->the_post();
 			?>
 			<?php
-			$spa_terms = get_the_terms( $post->ID, 'infrastructure' );
-
+			$parent_locations = array();
+			
 			$pod    = pods( 'spa', get_the_id() );
 			$parent = $pod->field( 'property' );
+			if ( ! empty( $parent ) ) :
 				$parent_id = $parent['ID'];
 				$parent_terms = get_the_terms( $parent_id, 'location' );
-				$parent_locations = array();
+				$spa_terms = get_the_terms( $post->ID, 'infrastructure' );
 				$filter_classes = array_merge($parent_terms,$spa_terms);
 				if ( $filter_classes && ! is_wp_error( $filter_classes ) ) :
 					foreach ( $filter_classes as $fterm ) :
 						$parent_locations[] = $fterm->slug;
 					endforeach;
-				
 				$parent_location = join( " ", $parent_locations );
+				endif;
+			endif;
 			?>
 			<article class="col-12 col-md-4 grid-spa-item <?php echo esc_html( $parent_location ); ?>">
-			<?php endif; ?>
 				<a href="<?php the_permalink(); ?>" class="card card-link">
 					<figure>
 						<?php if ( has_post_thumbnail() ) : ?>
@@ -92,39 +93,39 @@
 </section>
 
 <script type="text/javascript">
-	(function( $ ) {
-		$(document).on( 'ready', function() {
-			// init Isotope
-			var $grid = $('.grid-spa').isotope({
-			itemSelector: '.grid-spa-item',
-			layoutMode: 'fitRows'
-			});
-			// store filter for each group
-			var filters = [];
-			// change is-checked class on buttons
-			$('.filters').on( 'click', 'a', function( event ) {
-			var $target = $( event.currentTarget );
-			$target.toggleClass('is-checked');
-			var isChecked = $target.hasClass('is-checked');
-			var filter = $target.attr('data-filter');
-			if ( isChecked ) {
-				addFilter( filter );
-			} else {
-				removeFilter( filter );
-			}
-			$grid.isotope({ filter: filters.join('') });
-			});
-			function addFilter( filter ) {
-			if ( filters.indexOf( filter ) == -1 ) {
-				filters.push( filter );
-			}
-			}
-			function removeFilter( filter ) {
-			var index = filters.indexOf( filter);
-			if ( index != -1 ) {
-				filters.splice( index, 1 );
-			}
-			}
-		});
-	})(jQuery);
+(function( $ ) {
+$(document).on( 'ready', function() {
+	// init Isotope
+	var $grid = $('.grid-spa').isotope({
+	itemSelector: '.grid-spa-item',
+	layoutMode: 'fitRows'
+	});
+	// store filter for each group
+	var filters = [];
+	// change is-checked class on buttons
+	$('.filters').on( 'click', 'a', function( event ) {
+	var $target = $( event.currentTarget );
+	$target.toggleClass('is-checked');
+	var isChecked = $target.hasClass('is-checked');
+	var filter = $target.attr('data-filter');
+	if ( isChecked ) {
+		addFilter( filter );
+	} else {
+		removeFilter( filter );
+	}
+	$grid.isotope({ filter: filters.join('') });
+	});
+	function addFilter( filter ) {
+	if ( filters.indexOf( filter ) == -1 ) {
+		filters.push( filter );
+	}
+	}
+	function removeFilter( filter ) {
+	var index = filters.indexOf( filter);
+	if ( index != -1 ) {
+		filters.splice( index, 1 );
+	}
+	}
+});
+})(jQuery);
 </script>
