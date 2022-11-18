@@ -19,4 +19,13 @@ $(function() {
     });
   }
 
+  if ($('body').hasClass('single-property')) {
+    var propertyGallerySwiper = new Swiper(".property-gallery-swiper", {
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  }
+
 });
