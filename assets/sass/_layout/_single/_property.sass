@@ -1,9 +1,39 @@
 .single-property
   .section-single-title
     &__title
-      margin-bottom: 30px
+      margin-bottom: 40px
+  .separator
+    .separator-line
+      color: $main-color
 
 .section-intro-property
+  .property-contact
+    list-style: none
+    padding: 0
+    margin: 20px 0 0 0
+    li
+      margin-bottom: 10px
+      a,
+      span
+        font-family: $roc-grotesk-font
+        font-weight: medium
+        font-size: 20px
+        line-height: 32px
+        letter-spacing: 0.4px
+        text-decoration: none
+        color: $main-color
+        transition: all .4s ease-in-out
+      a
+        &:hover
+          color: $accent-color
+      p
+        font-family: $roc-grotesk-font
+        font-size: 16px
+        font-weight: 300
+        line-height: 26px
+        letter-spacing: 0.56px
+        color: #474747
+        padding-left: 10px
   .property-gallery-swiper
     .swiper-button-next,
     .swiper-button-prev
@@ -21,3 +51,33 @@
 .section-host
   padding-top: 60px
   padding-bottom: 100px
+  .section
+    &__title
+      margin-bottom: 40px
+  .description
+    .host-name,
+    .host-position
+      font-weight: normal
+    .host-name
+      margin-bottom: 0px
+    .host-position
+      margin-bottom: 30px
+    p
+      font-family: $roc-grotesk-font
+      font-size: 16px
+      font-weight: 300
+      line-height: 26px
+      letter-spacing: 0.56px
+      color: #474747
+  .host-avatar
+    width: 200px
+    height: 200px
+    border-radius: 100%
+    overflow: hidden
+    margin: 0px
+    border: 6px solid #b1cbc5
+    img
+      max-width: 100%
+      width: 100%
+      height: auto
+      object-fit: cover

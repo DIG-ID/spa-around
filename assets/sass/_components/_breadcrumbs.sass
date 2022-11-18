@@ -6,6 +6,9 @@
   color: #747474
   span
     display: inline-block
+    > span
+      > span
+        margin: 0 5px
   .breadcrumb_last
     white-space: nowrap
     overflow: hidden
@@ -22,5 +25,6 @@
     text-decoration: none
     transition: all .3s ease-in-out
     color: #747474
+    margin-right: 5px
     &:hover
       color: $main-color
