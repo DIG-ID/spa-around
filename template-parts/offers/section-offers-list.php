@@ -75,7 +75,7 @@
 					<a href="<?php the_permalink(); ?>" class="card card-link">
 						<figure>
 							<?php if ( has_post_thumbnail() ) : ?>
-								<?php the_post_thumbnail( 'single-post-thumbnail' ); ?>
+								<?php the_post_thumbnail( 'card' ); ?>
 							<?php endif; ?>
 							<figcaption>
 								<?php the_title( '<h2>', '</h2>' ); ?>
