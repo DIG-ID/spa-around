@@ -1,18 +1,18 @@
-<div class="container separator">
-	<div class="row">
-		<div class="col-12">
-			<hr class="separator-line">
-		</div>
-	</div>
-</div>
 <?php
 $host_name        = get_field( 'host_details_name' );
 $host_position    = get_field( 'host_details_position' );
 $host_description = get_field( 'host_details_description' );
 $host_image       = get_field( 'host_details_avatar' );
 
-if ( $host_name && $host_image ) :
+if ( $host_name ) :
 	?>
+	<div class="container separator">
+		<div class="row">
+			<div class="col-12">
+				<hr class="separator-line">
+			</div>
+		</div>
+	</div>
 	<section class="section section-host">
 		<div class="container">
 			<div class="row">

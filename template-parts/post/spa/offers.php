@@ -1,10 +1,3 @@
-<div class="container separator">
-	<div class="row">
-		<div class="col-12">
-			<hr class="separator-line">
-		</div>
-	</div>
-</div>
 <?php
 $pod    = pods( 'spa', get_the_id() );
 $parent = $pod->field( 'property' );
@@ -13,6 +6,13 @@ if ( ! empty( $parent ) ) :
 	$offers     = $parent_pod->field( array( 'name' => 'property_offers', 'output' => 'objects' ) );
 	if ( ! empty( $offers ) ) :
 		?>
+		<div class="container separator">
+			<div class="row">
+				<div class="col-12">
+					<hr class="separator-line">
+				</div>
+			</div>
+		</div>
 		<section class="section section-spa-offers">
 			<div class="container">
 				<div class="row">
@@ -39,4 +39,3 @@ if ( ! empty( $parent ) ) :
 		<?php
 	endif;
 endif;
-
