@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-12 col-md-7 d-flex justify-content-between align-items-center">
 				<img class="pe-5" src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/icon-spa-around.svg' ); ?>" alt="spa around icon">
-				<p class="section__description mb-0"><?php the_field('intro_text'); ?></p>
+				<p class="section__description mb-0"><?php the_field( 'intro_text' ); ?></p>
 			</div>
 		</div>
 	</div>

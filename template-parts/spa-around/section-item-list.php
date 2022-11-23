@@ -1,18 +1,18 @@
 <section class="section section-list" style="padding: 30px 0 50px 0;">
 	<div class="container">
-        <div class="row">
-            <div class="col-12">
-                <p class="spa__filter-title"><?php _e('Filter', 'spa-around') ?></p>
-            </div>
-        </div>
+		<div class="row">
+			<div class="col-12">
+				<p class="spa__filter-title"><?php _e('Filter', 'spa-around') ?></p>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-12 col-lg-4">
-                <p class="spa__filter-name"><?php _e('Location', 'spa-around') ?></p>
-            </div>
+					<p class="spa__filter-name"><?php _e('Location', 'spa-around') ?></p>
+			</div>
 			<div class="col-12 col-lg-8">
-                <p class="spa__filter-name"><?php _e('Infrastructure', 'spa-around') ?></p>
-            </div>
-            <div class="col-12 col-lg-4">
+					<p class="spa__filter-name"><?php _e('Infrastructure', 'spa-around') ?></p>
+			</div>
+			<div class="col-12 col-lg-4">
 				<div class="button-group spa__filter-button-group filters" data-filter-group="location">
 					<?php 
 						$spa_locationterms = get_terms( 'location', array('hide_empty' => false) ); 
@@ -24,8 +24,8 @@
 							endforeach;
 						endif;
 					?>
-                </div>
-            </div>
+					</div>
+			</div>
 			<div class="col-12 col-lg-8">
 				<div class="button-group spa__filter-button-group filters" data-filter-group="infrastructure">
 					<?php 
@@ -38,8 +38,8 @@
 						endforeach;
 					endif;
 					?>
-                </div>
-            </div>
+				</div>
+			</div>
 		</div>
 		<div class="row grid-spa">
 			<?php
@@ -51,42 +51,40 @@
 			);
 			$spa_query = new WP_Query( $spa_query_args );
 			if ( $spa_query->have_posts() ) :
-			while ( $spa_query->have_posts() ) :
-			$spa_query->the_post();
-			?>
-			<?php
-			$parent_locations = array();
-			
-			$pod    = pods( 'spa', get_the_id() );
-			$parent = $pod->field( 'property' );
-			if ( ! empty( $parent ) ) :
-				$parent_id = $parent['ID'];
-				$parent_terms = get_the_terms( $parent_id, 'location' );
-				$spa_terms = get_the_terms( $post->ID, 'infrastructure' );
-				$filter_classes = array_merge($parent_terms,$spa_terms);
-				if ( $filter_classes && ! is_wp_error( $filter_classes ) ) :
-					foreach ( $filter_classes as $fterm ) :
-						$parent_locations[] = $fterm->slug;
-					endforeach;
-				$parent_location = join( " ", $parent_locations );
-				endif;
-			endif;
-			?>
-			<article class="col-12 col-md-4 grid-spa-item <?php echo esc_html( $parent_location ); ?>">
-				<a href="<?php the_permalink(); ?>" class="card card-link">
-					<figure>
-						<?php if ( has_post_thumbnail() ) : ?>
-							<?php the_post_thumbnail( 'card' ); ?>
-						<?php endif; ?>
-						<figcaption>
-							<?php the_title( '<h2>', '</h2>' ); ?>
-						</figcaption>
-					</figure>
-				</a>
-			</article>
-			<?php
-			endwhile;
-			wp_reset_postdata();
+				while ( $spa_query->have_posts() ) :
+					$spa_query->the_post();
+					$parent_locations = array();
+					
+					$pod    = pods( 'spa', get_the_id() );
+					$parent = $pod->field( 'property' );
+					if ( ! empty( $parent ) ) :
+						$parent_id = $parent['ID'];
+						$parent_terms = get_the_terms( $parent_id, 'location' );
+						$spa_terms = get_the_terms( $post->ID, 'infrastructure' );
+						$filter_classes = array_merge($parent_terms,$spa_terms);
+						if ( $filter_classes && ! is_wp_error( $filter_classes ) ) :
+							foreach ( $filter_classes as $fterm ) :
+								$parent_locations[] = $fterm->slug;
+							endforeach;
+							$parent_location = join( " ", $parent_locations );
+						endif;
+					endif;
+					?>
+					<article class="col-12 col-md-4 grid-spa-item <?php echo esc_html( $parent_location ); ?>">
+						<a href="<?php the_permalink(); ?>" class="card card-link">
+							<figure>
+								<?php if ( has_post_thumbnail() ) : ?>
+									<?php the_post_thumbnail( 'card' ); ?>
+								<?php endif; ?>
+								<figcaption>
+									<?php the_title( '<h2>', '</h2>' ); ?>
+								</figcaption>
+							</figure>
+						</a>
+					</article>
+					<?php
+				endwhile;
+				wp_reset_postdata();
 			endif;
 			?>
 	</div>
