@@ -92,39 +92,67 @@
 </section>
 
 <script type="text/javascript">
-	(function( $ ) {
-$(document).on( 'ready', function() {
-	// init Isotope
-	var $grid = $('.grid-offer').isotope({
-	itemSelector: '.grid-offer-item',
-	layoutMode: 'fitRows'
+(function( $ ) {
+	$(document).on( 'ready', function() {
+		// init Isotope
+		var $grid = $('.grid-offer').isotope({
+		itemSelector: '.grid-offer-item',
+		layoutMode: 'fitRows'
+		});
+
+		// store filter for each group
+		var filtersValue = [];
+		var filters = [];
+		var index = '';
+		// change is-checked class on buttons
+		$('.filters').on( 'click', 'a', function(  ) {
+			var $this = $(this);
+			var filter = '';
+			$this.toggleClass('is-checked');
+			var isChecked = $this.hasClass('is-checked');
+
+			// get group key
+			var $buttonGroup = $this.parents('.button-group');
+			var filterGroup = $buttonGroup.attr('data-filter-group');
+			// set filter for group
+			filtersValue[ filterGroup ] = $this.attr('data-filter');
+			filter = concatValues( filtersValue );
+			
+			if ( isChecked ) {
+				addFilter( filter );
+			} else {
+				removeFilter( filter );
+			}
+			// filter isotope
+			// group filters together, inclusive
+			$grid.isotope({ filter: filters.join('') });
+		});
+		
+		function addFilter( filter ) {
+			index = filters.indexOf( filter);
+			if ( index == -1 ) {
+				filters.push( filter );
+				filtersValue = [];
+				console.log(filters, filter);
+			}
+		}
+
+		function removeFilter( filter ) {
+			index = filters.indexOf( filter);
+			if ( index != -1 ) {
+				filters.splice( index, 1 );
+				filtersValue = [];
+				console.log(filters, filter);
+			}
+		}
+		// flatten object by concatting values
+		function concatValues( obj ) {
+			var value = '';
+			for ( var prop in obj ) {
+				value += obj[ prop ];
+			}
+			return value;
+		}
 	});
-	// store filter for each group
-	var filters = [];
-	// change is-checked class on buttons
-	$('.filters').on( 'click', 'a', function( event ) {
-	var $target = $( event.currentTarget );
-	$target.toggleClass('is-checked');
-	var isChecked = $target.hasClass('is-checked');
-	var filter = $target.attr('data-filter');
-	if ( isChecked ) {
-		addFilter( filter );
-	} else {
-		removeFilter( filter );
-	}
-	$grid.isotope({ filter: filters.join('') });
-	});
-	function addFilter( filter ) {
-	if ( filters.indexOf( filter ) == -1 ) {
-		filters.push( filter );
-	}
-	}
-	function removeFilter( filter ) {
-	var index = filters.indexOf( filter);
-	if ( index != -1 ) {
-		filters.splice( index, 1 );
-	}
-	}
-});
 })(jQuery);
 </script>
