@@ -104,62 +104,55 @@
 		// store filter for each group
 		var filtersValue = [];
 		var filters = [];
-
+		var index = '';
 		// change is-checked class on buttons
-		$('.filters').on( 'click', 'a', function( event ) {
-		var $this = $(this);
-		var $target = $( event.currentTarget );
-		var filter = "";
-		$target.toggleClass('is-checked');
-		var isChecked = $target.hasClass('is-checked');
+		$('.filters').on( 'click', 'a', function(  ) {
+			var $this = $(this);
+			var filter = '';
+			$this.toggleClass('is-checked');
+			var isChecked = $this.hasClass('is-checked');
 
-		// get group key
-		var $buttonGroup = $this.parents('.button-group');
-		var filterGroup = $buttonGroup.attr('data-filter-group');
-		// set filter for group
-		filtersValue[ filterGroup ] = $target.attr('data-filter');
-		if ( filter == "" ){
+			// get group key
+			var $buttonGroup = $this.parents('.button-group');
+			var filterGroup = $buttonGroup.attr('data-filter-group');
+			// set filter for group
+			filtersValue[ filterGroup ] = $this.attr('data-filter');
 			filter = concatValues( filtersValue );
-		}
-		console.log(filter);
-		if ( isChecked ) {
-			addFilter( filter );
-		} else {
-			removeFilter( filter );
-		}
-		// filter isotope
-		// group filters together, inclusive
-		$grid.isotope({ filter: filters.join('') });
+			
+			if ( isChecked ) {
+				addFilter( filter );
+			} else {
+				removeFilter( filter );
+			}
+			// filter isotope
+			// group filters together, inclusive
+			$grid.isotope({ filter: filters.join('') });
 		});
 		
 		function addFilter( filter ) {
-			var index = filters.indexOf( filter);
-			console.log(filters.indexOf( filter ));
-		if ( filters.indexOf( filter ) == -1 ) {
-			filters.splice( index, 1, filter );
-			filter = concatValues( filters );
-			console.log(filters);
-			console.log(filter);
-		}
+			index = filters.indexOf( filter);
+			if ( index == -1 ) {
+				filters.push( filter );
+				filtersValue = [];
+				console.log(filters, filter);
+			}
 		}
 
 		function removeFilter( filter ) {
-		var index = filters.indexOf( filter);
-		console.log(index);
-		if ( index != -1 ) {
-			filters.splice( index, 5 );
-			filter = "";
-			console.log(filters);
-			console.log(filter);
-		}
+			index = filters.indexOf( filter);
+			if ( index != -1 ) {
+				filters.splice( index, 1 );
+				filtersValue = [];
+				console.log(filters, filter);
+			}
 		}
 		// flatten object by concatting values
 		function concatValues( obj ) {
-		var value = '';
-		for ( var prop in obj ) {
-			value += obj[ prop ];
-		}
-		return value;
+			var value = '';
+			for ( var prop in obj ) {
+				value += obj[ prop ];
+			}
+			return value;
 		}
 	});
 })(jQuery);
