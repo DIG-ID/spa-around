@@ -25,8 +25,8 @@ if ( ! empty( $parent ) ) :
 						<div class="swiper related-offers-swiper">
 							<div class="row swiper-wrapper">
 								<?php
-								foreach ( $offers as $post ) :
-									setup_postdata( $post );
+								foreach ( $offers as $offer ) :
+									setup_postdata( $offer );
 									get_template_part( 'template-parts/loops/loop', 'related-offers' );
 								endforeach;
 								?>
