@@ -5,6 +5,7 @@ if ( ! empty( $parent ) ) :
 	$parent_pod = pods( 'property', $parent['ID'] );
 	$offers     = $parent_pod->field( array( 'name' => 'property_offers', 'output' => 'objects' ) );
 	if ( ! empty( $offers ) ) :
+		var_dump($offers);
 		?>
 		<div class="container separator">
 			<div class="row">
@@ -26,8 +27,24 @@ if ( ! empty( $parent ) ) :
 							<div class="row swiper-wrapper">
 								<?php
 								foreach ( $offers as $offer ) :
-									setup_postdata( $offer );
-									get_template_part( 'template-parts/loops/loop', 'related-offers' );
+									//setup_postdata( $post );
+									var_dump($offer);
+									?>
+									<article class="swiper-slide col-md-3">
+										<a href="<?php the_permalink( $offer['ID'] ); ?>" rel="bookmark" class="card card-offer">
+											<figure>
+												<?php
+												if ( has_post_thumbnail( $offer['ID'] ) ) :
+													echo get_post_thumbnail( $offer['ID'], 'card' );
+												endif;
+												?>
+												<figcaption>
+													<h3><?php echo get_the_title( $offer['ID'] ); ?></h3>
+												</figcaption>
+											</figure>
+										</a>
+									</article>
+									<?php
 								endforeach;
 								?>
 							</div>
