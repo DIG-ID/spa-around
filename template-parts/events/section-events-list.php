@@ -12,7 +12,10 @@
 			<div class="col-12 col-lg-12">
 				<div class="button-group spa__filter-button-group filters" data-filter-group="location">
 					<?php 
-						$event_locationterms = get_terms( 'location', array('hide_empty' => false) ); 
+						$event_locationterms = get_terms( array(
+							'taxonomy' => 'location',
+							'hide_empty' => false,
+						) );
 						if ( $event_locationterms && ! is_wp_error( $event_locationterms ) ) :
 							foreach ( $event_locationterms as $event_locationterm ) :
 								$event_location_slug = $event_locationterm->slug;
@@ -39,7 +42,7 @@
 				?>
 				<?php 
 				$parent_locations = array();
-				$pod    = pods( 'event', get_the_id() );
+				$pod    = pods( 'events', get_the_id() );
 				$parent = $pod->field( 'property' );
 				if ( ! empty( $parent ) ) :
 					$parent_id = $parent['ID'];
