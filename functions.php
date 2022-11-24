@@ -29,7 +29,7 @@ function digid_theme_setup() {
 
 	add_image_size( 'avatar', 250, 250, array( 'center', 'center' ) );
 
-	add_image_size( 'properties-logos', 200, 120, array( 'center', 'center' ) );
+	add_image_size( 'properties-logos', 200, 140, array( 'center', 'center' ) );
 
 	add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script' ) );
 

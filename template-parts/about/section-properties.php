@@ -7,8 +7,8 @@
 		</div>
 		<div class="row">
 		<?php
-		if ( have_rows( 'about_details_properties' ) ) :
-			while ( have_rows( 'about_details_properties' ) ) :
+		if ( have_rows( 'about_details_logos' ) ) :
+			while ( have_rows( 'about_details_logos' ) ) :
 				the_row();
 				echo '<a href="' . esc_url( get_sub_field( 'link' ) ) . '" target="_blank" class="col-6 col-md-3 propertie-logo">' . wp_get_attachment_image( get_sub_field( 'image' ), 'properties-logos' ) . '</a>';
 			endwhile;
