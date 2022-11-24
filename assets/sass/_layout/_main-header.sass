@@ -61,15 +61,17 @@
             &::after
               transform: rotateZ(45deg) scaleX(1.4) translate(-1px, -1px)
       .wpml-ls-statics-shortcode_actions
-        margin-left: 40px
-        width: 40px
-        .wpml-ls-item-legacy-dropdown
+        margin-left: 30px
+        width: auto
+        > ul
+          display: inline-block
           .wpml-ls-item-toggle
-            padding: 0
+            padding: 0px 10px
             border: 0
-            transition: all 600ms ease-in-out
+            transition: all .4s ease-in-out
             background-color: transparent
             color: #fff
+            display: inline-block
             &::after
               display: none
             .wpml-ls-native
@@ -77,6 +79,26 @@
               font-weight: 500
               font-size: 16px
           .wpml-ls-sub-menu
+            transition: all 1s ease-in-out
+            top: 130%
+            border: 0
+            .wpml-ls-item
+              .wpml-ls-link
+                font-family: $roc-grotesk-font
+                font-weight: 500
+                font-size: 16px
+                border: 0
+                padding: 10px
+                color: #fff
+                background-color: $dark-color
+                transition: all .4s ease-in-out
+                display: inline-block
+                &:hover
+                  color: $main-color
+                .wpml-ls-native
+
+
+
     .navbar-collapse.collapsing
       transition: height 600ms ease-in-out
     .navbar-collapse
