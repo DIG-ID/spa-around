@@ -5,6 +5,7 @@ if ( ! empty( $parent ) ) :
 	$parent_pod = pods( 'property', $parent['ID'] );
 	$offers     = $parent_pod->field( 'property_offers' );
 	if ( ! empty( $offers ) ) :
+		var_dump($offers);
 		?>
 		<div class="container separator">
 			<div class="row">
@@ -27,6 +28,7 @@ if ( ! empty( $parent ) ) :
 								<?php
 								foreach ( $offers as $offer ) :
 									setup_postdata( $offer );
+									var_dump($offer);
 									?>
 									<article class="swiper-slide col-md-3">
 										<a href="<?php the_permalink(); ?>" rel="bookmark" class="card card-offer">
