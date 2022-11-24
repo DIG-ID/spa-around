@@ -15,7 +15,10 @@
 			<div class="col-12 col-lg-4">
 				<div class="button-group spa__filter-button-group filters" data-filter-group="location">
 					<?php 
-						$offer_locationterms = get_terms( 'location', array('hide_empty' => false) ); 
+						$offer_locationterms = get_terms( array(
+							'taxonomy' => 'location',
+							'hide_empty' => false,
+						) );
 						if ( $offer_locationterms && ! is_wp_error( $offer_locationterms ) ) :
 							foreach ( $offer_locationterms as $offer_locationterm ) :
 								$offer_location_slug = $offer_locationterm->slug;
@@ -29,7 +32,10 @@
 			<div class="col-12 col-lg-8">
 				<div class="button-group offer__filter-button-group filters" data-filter-group="category">
 					<?php 
-					$offer_allterms = get_terms( 'category', array('hide_empty' => true) ); 
+					$offer_allterms = get_terms( array(
+						'taxonomy' => 'category',
+						'hide_empty' => false,
+					) );
 					if ( $offer_allterms && ! is_wp_error( $offer_allterms ) ) :
 						foreach ( $offer_allterms as $offer_allterm ) :
 							$offer_category_slug = $offer_allterm->slug;
