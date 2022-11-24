@@ -15,7 +15,10 @@
 			<div class="col-12 col-lg-4">
 				<div class="button-group spa__filter-button-group filters" data-filter-group="location">
 					<?php 
-						$spa_locationterms = get_terms( 'location', array('hide_empty' => false) ); 
+						$spa_locationterms = get_terms( array(
+							'taxonomy' => 'location',
+							'hide_empty' => false,
+						) );
 						if ( $spa_locationterms && ! is_wp_error( $spa_locationterms ) ) :
 							foreach ( $spa_locationterms as $spa_locationterm ) :
 								$spa_location_slug = $spa_locationterm->slug;
@@ -29,7 +32,10 @@
 			<div class="col-12 col-lg-8">
 				<div class="button-group spa__filter-button-group filters" data-filter-group="infrastructure">
 					<?php 
-					$spa_allterms = get_terms( 'infrastructure', array('hide_empty' => true) ); 
+					$spa_allterms = get_terms( array(
+						'taxonomy' => 'infrastructure',
+						'hide_empty' => false,
+					) );
 					if ( $spa_allterms && ! is_wp_error( $spa_allterms ) ) :
 						foreach ( $spa_allterms as $spa_allterm ) :
 							$spa_infrastructure_slug = $spa_allterm->slug;
