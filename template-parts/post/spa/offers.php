@@ -4,6 +4,7 @@ $parent = $pod->field( 'property' );
 if ( ! empty( $parent ) ) :
 	$parent_pod = pods( 'property', $parent['ID'] );
 	$offers     = $parent_pod->field( array( 'name' => 'property_offers', 'output' => 'objects' ) );
+	var_dump($offers);
 	if ( ! empty( $offers ) ) :
 		?>
 		<div class="container separator">
