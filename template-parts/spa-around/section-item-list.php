@@ -47,6 +47,9 @@
 				</div>
 			</div>
 		</div>
+		<div class="grid__empty">
+			<p class="grid__empty-text"><?php _e('Leider keine Ergebnisse', 'spa-around') ?></p>
+		</div>
 		<div class="row grid-spa">
 			<?php
 			$spa_query_args = array(
@@ -105,6 +108,8 @@
 		layoutMode: 'fitRows'
 		});
 
+		// vanilla JS, no event argument
+		
 		// store filter for each group
 		var filtersValue = [];
 		var filters = [];
@@ -132,7 +137,15 @@
 			// group filters together, inclusive
 			$grid.isotope({ filter: filters.join('') });
 		});
-		
+
+		$grid.on( 'arrangeComplete', function( event, filters ) {
+			if ( filters.length == 0 ){
+				$('.grid__empty').css('display', 'block');
+			} else{
+				$('.grid__empty').css('display', 'none');
+			}
+		});
+
 		function addFilter( filter ) {
 			index = filters.indexOf( filter);
 			if ( index == -1 ) {
