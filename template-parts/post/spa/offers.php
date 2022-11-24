@@ -26,9 +26,9 @@ if ( ! empty( $parent ) ) :
 						<div class="swiper related-offers-swiper">
 							<div class="row swiper-wrapper">
 								<?php
-								foreach ( $offers as $offer ) :
-									setup_postdata( $offer );
-									var_dump($offer);
+								foreach ( $offers as $post ) :
+									setup_postdata( $post );
+									var_dump($post);
 									?>
 									<article class="swiper-slide col-md-3">
 										<a href="<?php the_permalink(); ?>" rel="bookmark" class="card card-offer">
