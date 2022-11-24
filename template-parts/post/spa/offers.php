@@ -3,9 +3,8 @@ $pod    = pods( 'spa', get_the_id() );
 $parent = $pod->field( 'property' );
 if ( ! empty( $parent ) ) :
 	$parent_pod = pods( 'property', $parent['ID'] );
-	$offers     = $parent_pod->field( array( 'name' => 'property_offers', 'output' => 'objects' ) );
+	$offers     = $parent_pod->field( array( 'name' => 'property_offers', 'output' => 'ids' ) );
 	if ( ! empty( $offers ) ) :
-		var_dump($offers);
 		?>
 		<div class="container separator">
 			<div class="row">
@@ -27,19 +26,17 @@ if ( ! empty( $parent ) ) :
 							<div class="row swiper-wrapper">
 								<?php
 								foreach ( $offers as $offer ) :
-									//setup_postdata( $post );
-									var_dump($offer);
 									?>
 									<article class="swiper-slide col-md-3">
-										<a href="<?php echo get_the_permalink( $offer['ID'] ); ?>" rel="bookmark" class="card card-offer">
+										<a href="<?php echo get_the_permalink( $offer ); ?>" rel="bookmark" class="card card-offer">
 											<figure>
 												<?php
-												if ( has_post_thumbnail( $offer['ID'] ) ) :
-													echo get_post_thumbnail( $offer['ID'], 'card' );
+												if ( has_post_thumbnail( $offer ) ) :
+													echo get_the_post_thumbnail( $offer, 'card' );
 												endif;
 												?>
 												<figcaption>
-													<h3><?php echo get_the_title( $offer['ID'] ); ?></h3>
+													<h3><?php echo get_the_title( $offer ); ?></h3>
 												</figcaption>
 											</figure>
 										</a>
