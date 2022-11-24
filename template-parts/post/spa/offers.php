@@ -31,7 +31,7 @@ if ( ! empty( $parent ) ) :
 									var_dump($offer);
 									?>
 									<article class="swiper-slide col-md-3">
-										<a href="<?php the_permalink( $offer['ID'] ); ?>" rel="bookmark" class="card card-offer">
+										<a href="<?php echo get_the_permalink( $offer['ID'] ); ?>" rel="bookmark" class="card card-offer">
 											<figure>
 												<?php
 												if ( has_post_thumbnail( $offer['ID'] ) ) :
