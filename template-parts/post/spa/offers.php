@@ -18,7 +18,7 @@ if ( ! empty( $parent ) ) :
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
-						<h2 class="section__title"><?php esc_html_e( 'SPA Offers', 'digid' ); ?></h2>
+						<h2 class="section__title"><?php esc_html_e( 'Massage & Behandlungen', 'digid' ); ?></h2>
 					</div>
 				</div>
 				<div class="row">
