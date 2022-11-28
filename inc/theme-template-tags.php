@@ -98,7 +98,7 @@ function digid_get_custom_single_post_meta() {
 			$offer_duration = get_field( 'offer_details_duration' );
 
 			if ( $offer_price ) :
-				echo '<div class="price"><p><span>' . esc_html__( 'Preis:', 'digid' ) . '</span> ' . $offer_price . '</p></div>';
+				echo '<div class="price"><p><span>' . esc_html__( 'Price:', 'digid' ) . '</span> ' . $offer_price . '</p></div>';
 			endif;
 
 			$meta_content = '<ul class="single-meta offer-meta">';
@@ -129,7 +129,7 @@ function digid_get_custom_single_post_meta() {
 			$event_date     = get_field( 'event_details_date' );
 
 			if ( $event_price ) :
-				echo '<div class="price"><p><span>' . esc_html__( 'Preis:', 'digid' ) . '</span> ' . $event_price . '</p></div>';
+				echo '<div class="price"><p><span>' . esc_html__( 'Price:', 'digid' ) . '</span> ' . $event_price . '</p></div>';
 			endif;
 
 			$meta_content = '<ul class="single-meta event-meta">';
