@@ -2,12 +2,12 @@
 	<div class="container">
         <div class="row">
             <div class="col-12">
-                <p class="event__filter-title"><?php _e('Filter', 'spa-around') ?></p>
+                <p class="event__filter-title"><?php _e('Filter', 'digid') ?></p>
             </div>
         </div>
 		<div class="row">
 			<div class="col-12 col-lg-12">
-                <p class="spa__filter-name"><?php _e('Location', 'spa-around') ?></p>
+                <p class="spa__filter-name"><?php _e('Ort', 'digid') ?></p>
             </div>
 			<div class="col-12 col-lg-12">
 				<div class="button-group spa__filter-button-group filters filters_location" data-filter-group="location">
