@@ -3,13 +3,17 @@
     padding-top: 70px
     padding-bottom: 70px
     background-color: $dark-color
-    .footer-logo
-      width: 80%
-      max-width: 100%
     svg
-      width: 80%
+      width: 90%
       max-width: 100%
       object-fit: cover
+    .destination-logo
+      text-align: right
+      img
+        width: 80%
+        height: auto
+        max-width: 100%
+        object-fit: cover
     .footer-nav
       list-style: none
       padding-left: 0
@@ -44,12 +48,16 @@
     .developed-by
       text-align: right
 
-@include media-breakpoint-down(md)
+@include media-breakpoint-down(lg)
   #main-footer
     .footer-content
       svg
         width: auto
         margin-bottom: 30px
+      .destination-logo
+        text-align: left
+        img
+          width: 70%
       .footer-nav
         margin-bottom: 30px
     .footer-copyright
@@ -57,3 +65,10 @@
         margin-bottom: 5px
       .developed-by
         text-align: left
+
+@include media-breakpoint-down(md)
+  #main-footer
+    .footer-content
+      .destination-logo
+        img
+          width: 60%

@@ -1,4 +1,4 @@
-<article class="swiper-slide col-md-3">
+<article class="swiper-slide col-12 col-sm-4 col-md-3 col-lg-3">
 	<a href="<?php the_permalink(); ?>" rel="bookmark" class="card card-offer">
 		<figure>
 			<?php

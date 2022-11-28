@@ -1,7 +1,7 @@
 <section class="section section-intro-single section-intro-spa">
 	<div class="container">
-		<div class="row justify-content-between">
-			<div class="col-12 col-md-4 description spa-descrition">
+		<div class="row justify-lg-content-between">
+			<div class="col-12 col-md-12 col-lg-4 description spa-descrition">
 				<?php the_field( 'spa_details_description' ); ?>
 				<?php $booking_form = get_field( 'spa_details_booking_shortcode' ); ?>
 				<?php if ( $booking_form ) : ?>
@@ -23,7 +23,7 @@
 					</div>
 				<?php endif; ?>
 			</div>
-			<div class="col-12 col-md-7 spa-gallery">
+			<div class="col-12 col-md-12 col-lg-7 spa-gallery">
 				<!-- Swiper -->
 				<div id="spa-gallery" class="swiper spa-gallery-swiper">
 					<div class="swiper-wrapper">
