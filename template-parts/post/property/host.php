@@ -21,14 +21,14 @@ if ( $host_name ) :
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-12 col-md-8">
-					<div class="row justify-content-between">
-						<div class="col-3">
+				<div class="col-12">
+					<div class="row justify-lg-content-between">
+						<div class="col-12 col-md-12 col-lg-3">
 							<figure class="host-avatar">
 								<?php echo wp_get_attachment_image( $host_image, 'avatar' ); ?>
 							</figure>
 						</div>
-						<div class="col-8 description">
+						<div class="col-12 col-md-12 col-lg-6 description">
 							<p class="host-name"><?php echo $host_name; ?></p>
 							<p class="host-position"><?php echo $host_position; ?></p>
 							<?php echo $host_description; ?>
