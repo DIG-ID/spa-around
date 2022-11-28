@@ -6,7 +6,7 @@
 				<?php $booking_form = get_field( 'spa_details_booking_shortcode' ); ?>
 				<?php if ( $booking_form ) : ?>
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#booking-modal">
-						<?php esc_html_e( 'Jetzt reservieren', 'digid' ); ?>
+						<?php esc_html_e( 'Book now', 'digid' ); ?>
 					</button>
 					<!-- Vertically centered modal -->
 					<div class="modal fade" id="booking-modal" tabindex="-1" aria-labelledby="booking-modal" aria-hidden="true">

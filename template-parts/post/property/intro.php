@@ -9,13 +9,13 @@
 				$property_phone   = get_field( 'property_details_telephone' );
 				echo '<ul class="property-contact">';
 				if ( $property_address ) :
-					echo '<li><span>' . esc_html__( 'Adresse', 'digid' ) . '</span><br>' . $property_address . '</li>';
+					echo '<li><span>' . esc_html__( 'Address', 'digid' ) . '</span><br>' . $property_address . '</li>';
 				endif;
 				if ( $property_email ) :
 					echo '<li><a href="mailto:' . $property_email . '" >' . esc_html__( 'E-mail', 'digid' ) . '</a></li>';
 				endif;
 				if ( $property_phone ) :
-					echo '<li><a href="tel:' . $property_phone . '" >' . esc_html__( 'Telefon', 'digid' ) . '</a></li>';
+					echo '<li><a href="tel:' . $property_phone . '" >' . esc_html__( 'Phone', 'digid' ) . '</a></li>';
 				endif;
 				echo '</ul>';
 				?>
