@@ -190,3 +190,54 @@
 /*body:has(.navbar-collapse.collapse.show)
   height: 100vh
   overflow-y: hidden*/
+@include media-breakpoint-down(md)
+  #main-header
+    .navbar
+      .site-branding
+        .navbar-brand
+          .custom-logo
+            width: 85%
+      .navbar-collapse
+        .navbar-nav
+          min-height: calc( 100vh - 130px )
+          .nav-item
+            .nav-link
+              font-size: 32px
+              line-height: 52px
+  #main-header.sticky
+    .navbar:not(.nav-open)
+      .site-branding
+        .navbar-brand
+          .custom-logo
+            width: 85%
+    .navbar.nav-open
+      .site-branding
+        .navbar-brand
+          .custom-logo
+            width: 85%
+
+@include media-breakpoint-down(sm)
+  #main-header
+    .navbar
+      .site-branding
+        .navbar-brand
+          .custom-logo
+            width: 80%
+      .navbar-collapse
+        .navbar-nav
+          min-height: calc( 100vh - 130px )
+          .nav-item
+            .nav-link
+              font-size: 28px
+              line-height: 48px
+  #main-header.sticky
+    .navbar:not(.nav-open)
+      .site-branding
+        .navbar-brand
+          .custom-logo
+            width: 80%
+    .navbar.nav-open
+      .site-branding
+        .navbar-brand
+          .custom-logo
+            width: 80%

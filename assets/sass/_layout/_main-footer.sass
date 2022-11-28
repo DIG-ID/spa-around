@@ -6,6 +6,10 @@
     .footer-logo
       width: 80%
       max-width: 100%
+    svg
+      width: 80%
+      max-width: 100%
+      object-fit: cover
     .footer-nav
       list-style: none
       padding-left: 0
@@ -39,3 +43,17 @@
           color: $accent-color
     .developed-by
       text-align: right
+
+@include media-breakpoint-down(md)
+  #main-footer
+    .footer-content
+      svg
+        width: auto
+        margin-bottom: 30px
+      .footer-nav
+        margin-bottom: 30px
+    .footer-copyright
+      .copyright
+        margin-bottom: 5px
+      .developed-by
+        text-align: left
