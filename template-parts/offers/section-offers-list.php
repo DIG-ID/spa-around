@@ -7,10 +7,10 @@
         </div>
 		<div class="row">
 			<div class="col-12 col-lg-4">
-                <p class="spa__filter-name"><?php _e('Ort', 'digid') ?></p>
+                <p class="spa__filter-name"><?php _e('Location', 'digid') ?></p>
             </div>
 			<div class="col-12 col-lg-8">
-                <p class="offer__filter-name"><?php _e('Kategorie', 'digid') ?></p>
+                <p class="offer__filter-name"><?php _e('Category', 'digid') ?></p>
             </div>
 			<div class="col-12 col-lg-4">
 				<div class="button-group spa__filter-button-group filters filters_location" data-filter-group="location">
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 		<div class="grid__empty">
-			<p class="grid__empty-text"><?php _e('Leider keine Ergebnisse', 'spa-around') ?></p>
+			<p class="grid__empty-text"><?php _e('Leider keine Ergebnisse', 'digid') ?></p>
 		</div>
 		<div class="row grid-offer">
 			<?php
