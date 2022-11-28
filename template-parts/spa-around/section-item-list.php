@@ -13,7 +13,7 @@
 					<p class="spa__filter-name"><?php _e('Infrastructure', 'spa-around') ?></p>
 			</div>
 			<div class="col-12 col-lg-4">
-				<div class="button-group spa__filter-button-group filters" data-filter-group="location">
+				<div class="button-group spa__filter-button-group filters filters_location" data-filter-group="location">
 					<?php 
 						$spa_locationterms = get_terms( array(
 							'taxonomy' => 'location',
@@ -129,7 +129,7 @@
 			filter = concatValues( filtersValue );
 			
 			if ( isChecked ) {
-				addFilter( filter );
+				addFilter( filter, $this );
 			} else {
 				removeFilter( filter );
 			}
@@ -146,12 +146,25 @@
 			}
 		});
 
-		function addFilter( filter ) {
-			index = filters.indexOf( filter);
-			if ( index == -1 ) {
-				filters.push( filter );
+		function addFilter( filter, $this ) {
+			$location_button = $this.parents('.button-group');
+			if($location_button.hasClass('filters_location')){
+				index = filters.indexOf( filter);
+				$location_button.children('a').not($this).removeClass('is-checked');
+				filters.splice( index, 1 );
 				filtersValue = [];
-				console.log(filters, filter);
+				if ( index == -1 ) {
+					filters.push( filter );
+					filtersValue = [];
+					console.log(filters, filter);
+				}
+			} else {
+				index = filters.indexOf( filter);
+				if ( index == -1 ) {
+					filters.push( filter );
+					filtersValue = [];
+					console.log(filters, filter);
+				}
 			}
 		}
 

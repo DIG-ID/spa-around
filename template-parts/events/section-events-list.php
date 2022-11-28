@@ -10,7 +10,7 @@
                 <p class="spa__filter-name"><?php _e('Location', 'spa-around') ?></p>
             </div>
 			<div class="col-12 col-lg-12">
-				<div class="button-group spa__filter-button-group filters" data-filter-group="location">
+				<div class="button-group spa__filter-button-group filters filters_location" data-filter-group="location">
 					<?php 
 						$event_locationterms = get_terms( array(
 							'taxonomy' => 'location',
@@ -89,16 +89,17 @@
 		var filters = [];
 		// change is-checked class on buttons
 		$('.filters').on( 'click', 'a', function( event ) {
-		var $target = $( event.currentTarget );
-		$target.toggleClass('is-checked');
-		var isChecked = $target.hasClass('is-checked');
-		var filter = $target.attr('data-filter');
-		if ( isChecked ) {
-			addFilter( filter );
-		} else {
-			removeFilter( filter );
-		}
-		$grid.isotope({ filter: filters.join('') });
+			var $this = $(this);
+			var $target = $( event.currentTarget );
+			$target.toggleClass('is-checked');
+			var isChecked = $target.hasClass('is-checked');
+			var filter = $target.attr('data-filter');
+			if ( isChecked ) {
+				addFilter( filter, $this );
+			} else {
+				removeFilter( filter );
+			}
+			$grid.isotope({ filter: filters.join('') });
 		});
 		$grid.on( 'arrangeComplete', function( event, filters ) {
 			if ( filters.length == 0 ){
@@ -107,16 +108,30 @@
 				$('.grid__empty').css('display', 'none');
 			}
 		});
-		function addFilter( filter ) {
-		if ( filters.indexOf( filter ) == -1 ) {
-			filters.push( filter );
-		}
+		function addFilter( filter, $this ) {
+			$location_button = $this.parents('.button-group');
+			if($location_button.hasClass('filters_location')){
+				index = filters.indexOf( filter);
+				$location_button.children('a').not($this).removeClass('is-checked');
+				filters.splice( index, 1 );
+				filtersValue = [];
+				if ( index == -1 ) {
+					filters.push( filter );
+					filtersValue = [];
+				}
+			} else {
+				index = filters.indexOf( filter);
+				if ( index == -1 ) {
+					filters.push( filter );
+					filtersValue = [];
+				}
+			}
 		}
 		function removeFilter( filter ) {
-		var index = filters.indexOf( filter);
-		if ( index != -1 ) {
-			filters.splice( index, 1 );
-		}
+			var index = filters.indexOf( filter);
+			if ( index != -1 ) {
+				filters.splice( index, 1 );
+			}
 		}
 	});
 })(jQuery);
