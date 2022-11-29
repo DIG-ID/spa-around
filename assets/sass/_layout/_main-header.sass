@@ -111,7 +111,6 @@
                 .wpml-ls-native
 
 
-
     .navbar-collapse.collapsing
       transition: height 600ms ease-in-out
     .navbar-collapse
@@ -119,6 +118,8 @@
         min-height: calc( 100vh - 130px )
         justify-content: center
         align-items: center
+        .wpml-ls-item
+          display: none
         .nav-item
           .nav-link
             font-family: $roc-grotesk-font
@@ -193,6 +194,9 @@
 @include media-breakpoint-down(md)
   #main-header
     .navbar
+      .navbar-actions
+        .wpml-ls-statics-shortcode_actions
+          display: none
       .site-branding
         .navbar-brand
           .custom-logo
@@ -200,6 +204,14 @@
       .navbar-collapse
         .navbar-nav
           min-height: calc( 100vh - 130px )
+          .wpml-ls-item
+            display: block
+            .nav-link
+              font-size: 18px
+              color: $dark-color
+              transition: all .4s ease-in-out
+              &:hover
+                color: #fff
           .nav-item
             .nav-link
               font-size: 32px
@@ -228,7 +240,7 @@
           min-height: calc( 100vh - 130px )
           .nav-item
             .nav-link
-              font-size: 28px
+              font-size: 24px
               line-height: 48px
   #main-header.sticky
     .navbar:not(.nav-open)

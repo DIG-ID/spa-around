@@ -23,7 +23,7 @@
 					</div>
 				<?php endif; ?>
 			</div>
-			<div class="col-12 col-md-12 col-lg-7 spa-gallery">
+			<div class="col-12 col-md-12 col-lg-6 spa-gallery">
 				<!-- Swiper -->
 				<div id="spa-gallery" class="swiper spa-gallery-swiper">
 					<div class="swiper-wrapper">

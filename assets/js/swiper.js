@@ -10,7 +10,25 @@ $(function() {
       },
     });
     var relatedOffersSwiper = new Swiper(".related-offers-swiper", {
-      slidesPerView: "auto",
+      breakpoints: {
+        576: {
+          slidesPerView: 2,
+          spaceBetween: 30,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 30,
+        },
+        992: {
+          slidesPerView: auto,
+          spaceBetween: 30,
+        },
+        1200: {
+          slidesPerView: auto,
+          spaceBetween: 30,
+        },
+      },
+      slidesPerView: 1,
       spaceBetween: 30,
       pagination: {
         el: ".swiper-pagination",
