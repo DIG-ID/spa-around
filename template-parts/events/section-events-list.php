@@ -28,7 +28,7 @@
 			</div>
 		</div>
 		<div class="grid__empty">
-			<p class="grid__empty-text"><?php _e('Leider keine Ergebnisse', 'digid') ?></p>
+			<p class="grid__empty-text"><?php _e('Sorry, no results', 'digid') ?></p>
 		</div>
 		<div class="row grid-event">
 			<?php
