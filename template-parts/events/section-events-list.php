@@ -9,7 +9,7 @@
 			<div class="col-12 col-lg-12">
                 <p class="spa__filter-name"><?php _e('Location', 'digid') ?></p>
             </div>
-			<div class="col-12 col-lg-12">
+			<div class="col-12 col-lg-4">
 				<div class="button-group spa__filter-button-group filters filters_location" data-filter-group="location">
 					<?php 
 						$event_locationterms = get_terms( array(
@@ -25,6 +25,12 @@
 						endif;
 					?>
                 </div>
+			</div>
+			<div class="col-12 col-lg-8">
+				<div class="button-group offer__filter-button-group filters" data-filter-group="date" style="display: none;">
+					<input id="event_date_start" class="start" type="text"></input>
+					<input id="event_date_end" class="end" type="text"></input>
+				</div>
 			</div>
 		</div>
 		<div class="grid__empty">
@@ -88,6 +94,16 @@
 		// store filter for each group
 		var filters = [];
 		// change is-checked class on buttons
+		$('.filters').on( 'click', '.qs-datepicker', function( event ) {
+			var startdate = $('#event_date_start').val(),
+				enddate = $('#event_date_start').val();
+
+			$grid.isotope({
+				filter: function () {
+					return startdate >= $(this).data("startdate") && enddate < $(this).data("enddate");
+				}
+			});
+		});
 		$('.filters').on( 'click', 'a', function( event ) {
 			var $this = $(this);
 			var $target = $( event.currentTarget );
