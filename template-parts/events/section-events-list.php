@@ -27,7 +27,7 @@
                 </div>
 			</div>
 			<div class="col-12 col-lg-8">
-				<div class="button-group offer__filter-button-group filtersDate" data-filter-group="date">
+				<div class="button-group offer__filter-button-group filtersDate" data-filter-group="date" style="display:none;">
 					<input id="event_date_start" class="start" type="text"></input>
 					<input id="event_date_end" class="end" type="text"></input>
 					<a class="event_filter" data-filter="date"><?php _e('Filter', 'digid') ?></a>
@@ -53,6 +53,8 @@
 				<?php 
 				$event_date_start_raw = get_field('event_details_date');
 				$event_date_end_raw = get_field('event_details_date_end');
+				$event_date_start_raw = str_replace('/', '-', $event_date_start_raw);
+				$event_date_end_raw = str_replace('/', '-', $event_date_end_raw);
 				$event_date_start = strtotime($event_date_start_raw);
 				$event_date_end = strtotime($event_date_end_raw);
 				$parent_locations = array();
@@ -68,7 +70,7 @@
 					$parent_location = join( " ", $parent_locations );
 					endif;
 				endif; ?>
-				<article class="col-12 col-md-4 grid-event-item <?php echo esc_html( $parent_location ); ?>" data-startdate="<?php echo esc_html( $event_date_start ); ?>" data-enddate="<?php echo esc_html( $event_date_end ); ?>">
+				<article class="col-12 col-md-4 grid-event-item <?php echo esc_attr( $parent_location ); ?>" data-startdate="<?php echo esc_attr( $event_date_start ); ?>" data-enddate="<?php echo esc_html( $event_date_end ); ?>">
 					<a href="<?php the_permalink(); ?>" class="card card-link">
 						<figure>
 							<?php if ( has_post_thumbnail() ) : ?>
