@@ -195,13 +195,13 @@ add_action( 'pre_get_posts', 'digid_set_home_post_types', 10, 1 );
  * @param boolean $with_script_tags
  * @return void
  */
-function console_log( $output, $with_script_tags = true ) {
+/*function console_log( $output, $with_script_tags = true ) {
 	$js_code = 'console.log(' . wp_json_encode( $output, JSON_HEX_TAG ) . ');';
 	if ( $with_script_tags ) :
 			$js_code = '<script>' . $js_code . '</script>';
 	endif;
 	echo $js_code;
-}
+}*/
 
 // Theme customizer options.
 require get_template_directory() . '/inc/customizer.php';
@@ -211,6 +211,9 @@ require get_template_directory() . '/inc/theme-template-tags.php';
 
 // Theme custom nav menu walker for bootstrap 5.
 require get_template_directory() . '/inc/custom-walker.php';
+
+// Theme custom login.
+require get_template_directory() . '/inc/admin.php';
 
 // Theme custom contact form 7 settings.
 //require get_template_directory() . '/inc/contact-form-settings.php';

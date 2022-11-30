@@ -10,6 +10,7 @@ mix
   })
   .js('assets/js/main.js', 'dist')
   .sass('assets/sass/main.sass', 'dist')
+  .sass('assets/sass/admin.sass', 'dist')
 
   .disableNotifications()
   .browserSync({
