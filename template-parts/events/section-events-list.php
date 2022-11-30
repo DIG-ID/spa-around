@@ -27,7 +27,7 @@
                 </div>
 			</div>
 			<div class="col-12 col-lg-8">
-				<div class="button-group offer__filter-button-group filtersDate" data-filter-group="date" style="display:none;">
+				<div class="button-group offer__filter-button-group filtersDate" data-filter-group="date">
 					<input id="event_date_start" class="start" type="text"></input>
 					<input id="event_date_end" class="end" type="text"></input>
 					<a class="event_filter" data-filter="date"><?php _e('Filter', 'digid') ?></a>
@@ -106,8 +106,8 @@
 		$('.filtersDate').on( 'click', '.event_filter', function( event ) {
 			var startdate_raw = $('#event_date_start').val();
 			var	enddate_raw = $('#event_date_end').val();
-			var startdate = Math.floor(new Date(startdate_raw).getTime() / 1000);
-			var enddate = Math.floor(new Date(enddate_raw).getTime() / 1000);
+			var startdate = $('#event_date_start').attr("data-start");
+			var enddate = $('#event_date_end').attr("data-end");
 			console.log(startdate, enddate);
 			$grid.isotope({
 				filter: function () {
