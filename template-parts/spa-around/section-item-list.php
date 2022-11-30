@@ -155,14 +155,12 @@
 				if ( index == -1 ) {
 					filters.push( filter );
 					filtersValue = [];
-					console.log(filters, filter);
 				}
 			} else {
 				index = filters.indexOf( filter);
 				if ( index == -1 ) {
 					filters.push( filter );
 					filtersValue = [];
-					console.log(filters, filter);
 				}
 			}
 		}
@@ -172,7 +170,6 @@
 			if ( index != -1 ) {
 				filters.splice( index, 1 );
 				filtersValue = [];
-				console.log(filters, filter);
 			}
 		}
 		// flatten object by concatting values

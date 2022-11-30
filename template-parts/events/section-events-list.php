@@ -27,7 +27,7 @@
                 </div>
 			</div>
 			<div class="col-12 col-lg-8">
-				<div class="button-group offer__filter-button-group filters" data-filter-group="date" style="display:none;">
+				<div class="button-group offer__filter-button-group filtersDate" data-filter-group="date" style="display:none;">
 					<input id="event_date_start" class="start" type="text"></input>
 					<input id="event_date_end" class="end" type="text"></input>
 					<a class="event_filter" data-filter="date"><?php _e('Filter', 'digid') ?></a>
@@ -51,9 +51,11 @@
 				$event_query->the_post();
 				?>
 				<?php 
-				$event_date = get_field('event_details_date');
+				$event_date_start_raw = get_field('event_details_date');
+				$event_date_end_raw = get_field('event_details_date_end');
+				$event_date_start = strtotime($event_date_start_raw);
+				$event_date_end = strtotime($event_date_end_raw);
 				$parent_locations = array();
-				array_push( $parent_locations, $event_date);
 				$pod    = pods( 'events', get_the_id() );
 				$parent = $pod->field( 'property' );
 				if ( ! empty( $parent ) ) :
@@ -66,7 +68,7 @@
 					$parent_location = join( " ", $parent_locations );
 					endif;
 				endif; ?>
-				<article class="col-12 col-md-4 grid-event-item <?php echo esc_html( $parent_location ); ?>">
+				<article class="col-12 col-md-4 grid-event-item <?php echo esc_html( $parent_location ); ?>" data-startdate="<?php echo esc_html( $event_date_start ); ?>" data-enddate="<?php echo esc_html( $event_date_end ); ?>">
 					<a href="<?php the_permalink(); ?>" class="card card-link">
 						<figure>
 							<?php if ( has_post_thumbnail() ) : ?>
@@ -85,7 +87,11 @@
 			?>
 	</div>
 </section>
+<?php
 
+
+
+?>
 <script type="text/javascript">
 (function( $ ) {
 	$(document).on( 'ready', function() {
@@ -96,14 +102,16 @@
 		});
 		// store filter for each group
 		var filters = [];
-		// change is-checked class on buttons
-		$('.filters').on( 'click', '.event_filter', function( event ) {
-			var startdate = $('#event_date_start').val(),
-				enddate = $('#event_date_end').val();
-			console.log(enddate);
+
+		$('.filtersDate').on( 'click', '.event_filter', function( event ) {
+			var startdate_raw = $('#event_date_start').val();
+			var	enddate_raw = $('#event_date_end').val();
+			var startdate = Math.floor(new Date(startdate_raw).getTime() / 1000);
+			var enddate = Math.floor(new Date(enddate_raw).getTime() / 1000);
+			console.log(startdate, enddate);
 			$grid.isotope({
 				filter: function () {
-					return startdate >= $(this).data("startdate") && enddate < $(this).data("enddate");
+					return startdate <= $(".grid-event-item").data("startdate") && enddate > $('.grid-event-item').data("enddate");
 				}
 			});
 		});
