@@ -55,8 +55,7 @@
 			$spa_query_args = array(
 				'post_type' => 'spa',
 				'nopaging'  => true,
-				'orderby'   => 'date',
-				'order'     => 'ASC',
+				'orderby'   => 'rand',
 			);
 			$spa_query = new WP_Query( $spa_query_args );
 			if ( $spa_query->have_posts() ) :

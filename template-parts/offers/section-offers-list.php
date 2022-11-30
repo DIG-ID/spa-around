@@ -55,8 +55,7 @@
 			$offer_query_args = array(
 				'post_type' => 'offer',
 				'nopaging'  => true,
-				'orderby'   => 'date',
-				'order'     => 'ASC',
+				'orderby'   => 'rand',
 			);
 			$offer_query = new WP_Query( $offer_query_args );
 			if ( $offer_query->have_posts() ) :
