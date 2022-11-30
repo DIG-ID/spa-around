@@ -5,7 +5,7 @@
                 <p class="offer__filter-title"><?php _e('Filter', 'digid') ?></p>
             </div>
         </div>
-		<div class="row">
+		<div class="row offer__filter-row">
 			<div class="col-12 col-lg-4">
                 <p class="spa__filter-name"><?php _e('Location', 'digid') ?></p>
             </div>

@@ -5,7 +5,7 @@
                 <p class="event__filter-title"><?php _e('Filter', 'digid') ?></p>
             </div>
         </div>
-		<div class="row">
+		<div class="row event__filter-row">
 			<div class="col-12 col-lg-12">
                 <p class="spa__filter-name"><?php _e('Location', 'digid') ?></p>
             </div>
@@ -27,9 +27,10 @@
                 </div>
 			</div>
 			<div class="col-12 col-lg-8">
-				<div class="button-group offer__filter-button-group filters" data-filter-group="date" style="display: none;">
+				<div class="button-group offer__filter-button-group filters" data-filter-group="date" style="display:none;">
 					<input id="event_date_start" class="start" type="text"></input>
 					<input id="event_date_end" class="end" type="text"></input>
+					<a class="event_filter" data-filter="date"><?php _e('Filter', 'digid') ?></a>
 				</div>
 			</div>
 		</div>
@@ -50,7 +51,10 @@
 				$event_query->the_post();
 				?>
 				<?php 
+				$event_date = the_field('event_details_date');
 				$parent_locations = array();
+				$data_teste = "30/11/2022";
+				array_push( $parent_locations, $data_teste);
 				$pod    = pods( 'events', get_the_id() );
 				$parent = $pod->field( 'property' );
 				if ( ! empty( $parent ) ) :
@@ -94,10 +98,10 @@
 		// store filter for each group
 		var filters = [];
 		// change is-checked class on buttons
-		$('.filters').on( 'click', '.qs-datepicker', function( event ) {
+		$('.filters').on( 'click', '.event_filter', function( event ) {
 			var startdate = $('#event_date_start').val(),
-				enddate = $('#event_date_start').val();
-
+				enddate = $('#event_date_end').val();
+			console.log(enddate);
 			$grid.isotope({
 				filter: function () {
 					return startdate >= $(this).data("startdate") && enddate < $(this).data("enddate");
