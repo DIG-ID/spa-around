@@ -23,7 +23,7 @@ function digid_theme_setup() {
 
 	add_image_size( 'card', 430, 250, array( 'center', 'center' ) );
 
-	add_image_size( 'banner-header', 1920, 400, array( 'center', 'center' ) );
+	add_image_size( 'banner-header', 1920, 600, array( 'center', 'center' ) );
 
 	add_image_size( 'gallery-item', 920, 500, array( 'center', 'center' ) );
 
