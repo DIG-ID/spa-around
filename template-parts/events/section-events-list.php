@@ -51,10 +51,9 @@
 				$event_query->the_post();
 				?>
 				<?php 
-				$event_date = the_field('event_details_date');
+				$event_date = get_field('event_details_date');
 				$parent_locations = array();
-				$data_teste = "30/11/2022";
-				array_push( $parent_locations, $data_teste);
+				array_push( $parent_locations, $event_date);
 				$pod    = pods( 'events', get_the_id() );
 				$parent = $pod->field( 'property' );
 				if ( ! empty( $parent ) ) :
