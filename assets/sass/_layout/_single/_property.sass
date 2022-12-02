@@ -10,30 +10,30 @@
   .property-contact
     list-style: none
     padding: 0
-    margin: 20px 0 0 0
+    margin: 30px 0 0 0
+    display: flex
+    align-items: center
     li
       margin-bottom: 10px
-      a,
-      span
-        font-family: $roc-grotesk-font
-        font-weight: medium
-        font-size: 20px
-        line-height: 32px
-        letter-spacing: 0.4px
-        text-decoration: none
-        color: $main-color
-        transition: all .4s ease-in-out
+      margin-right: 15px
+      &:last-of-type
+        margin-right: 0
       a
+        display: flex
+        justify-content: center
+        align-items: center
+        padding: 15px
+        border-radius: 10px
+        text-decoration: none
+        transition: all .4s ease-in-out
+        background-color: $main-color
+        color: #fff
+        width: 55px
+        svg
+          height: 26px
+          fill: #fff
         &:hover
-          color: $accent-color
-      p
-        font-family: $roc-grotesk-font
-        font-size: 16px
-        font-weight: 300
-        line-height: 26px
-        letter-spacing: 0.56px
-        color: #474747
-        padding-left: 10px
+          background-color: $accent-color
   .property-gallery-swiper
     .swiper-button-next,
     .swiper-button-prev

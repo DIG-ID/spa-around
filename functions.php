@@ -208,10 +208,12 @@ add_action( 'pre_get_posts', 'digid_set_home_post_types', 10, 1 );
  */
 
 function digid_exclude_menu_items() {
-	if ( ! current_user_can( 'administrator' ) || true ) :
+	if ( ! current_user_can( 'administrator' ) ) :
 		remove_menu_page( 'edit.php' );
 		remove_menu_page( 'tools.php', 'tools.php' );
-		remove_menu_page('edit-comments.php');
+		remove_menu_page( 'edit-comments.php' );
+		remove_menu_page( 'tools.php' );
+		remove_menu_page( 'options-general.php' );
 	endif;
 }
 
