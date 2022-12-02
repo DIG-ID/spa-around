@@ -176,7 +176,7 @@ function digid_hide_posts_from_custom_role() {
 /*
  * Sets the post types that can appear on the homepage.
  */
-function digid_set_home_post_types( $query ) {
+/*function digid_set_home_post_types( $query ) {
 
 	$is_target_query = ! is_admin() && $query->is_main_query() && $query->is_home;
 
@@ -202,6 +202,20 @@ add_action( 'pre_get_posts', 'digid_set_home_post_types', 10, 1 );
 	endif;
 	echo $js_code;
 }*/
+
+/**
+ * Hide certain items from admin menu based on the user role.
+ */
+
+function digid_exclude_menu_items() {
+	if ( ! current_user_can( 'administrator' ) || true ) :
+		remove_menu_page( 'edit.php' );
+		remove_menu_page( 'tools.php', 'tools.php' );
+		remove_menu_page('edit-comments.php');
+	endif;
+}
+
+add_filter( 'admin_init', 'digid_exclude_menu_items' );
 
 // Theme customizer options.
 require get_template_directory() . '/inc/customizer.php';
