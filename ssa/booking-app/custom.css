@@ -1,0 +1,35 @@
+/* Hide the icons for the fields in the booking form screen */
+body .md-input-container .md-icon,
+fieldset i.md-icon {
+display: none;
+}
+
+body .md-input-container .md-icon:not(.md-icon-delete)~label {
+left: 0;
+}
+
+body .md-input-container .md-icon:not(.md-icon-delete)~.md-input {
+margin-left: 0;
+}
+/* Hide the Appointment Duration */
+body .appointment-duration {
+display: none;
+}
+
+/* form back button */
+.md-button.md-fab.md-primary.md-mini.md-theme-default {
+margin-bottom:  30px;
+}
+
+/*confirmation step box*/
+.app-wrapper .confirm .md-card.md-theme-default {
+border-radious: 8px;
+box-shadow: none;
+}
+
+/*confirmation step button*/
+.app-wrapper .confirm .md-card.md-theme-default .md-card-actions .md-button {
+border-radius: 18px;
+padding: 15px 20px;
+line-height: 1.4;
+}
