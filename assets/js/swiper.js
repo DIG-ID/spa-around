@@ -20,11 +20,11 @@ $(function() {
           spaceBetween: 30,
         },
         992: {
-          slidesPerView: auto,
+          slidesPerView: 4,
           spaceBetween: 30,
         },
         1200: {
-          slidesPerView: auto,
+          slidesPerView: 4,
           spaceBetween: 30,
         },
       },

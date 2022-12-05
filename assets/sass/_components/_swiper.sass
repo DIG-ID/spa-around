@@ -1,13 +1,9 @@
 .related-offers-swiper
-  width: 100%
-  height: 100%
-  overflow: visible
   .swiper-button-next,
   .swiper-button-prev
     &::after
       font-size: 16px
   .swiper-slide
-    width: 25%
     opacity: 1
     transition: opacity .3s
     img
@@ -17,13 +13,3 @@
       object-fit: cover
   .swiper-slide-prev
     opacity: 0
-
-@include media-breakpoint-down(lg)
-  .related-offers-swiper
-    .swiper-slide
-      width: 50%
-
-@include media-breakpoint-down(md)
-  .related-offers-swiper
-    .swiper-slide
-      width: 100%
