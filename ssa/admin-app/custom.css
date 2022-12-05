@@ -1,0 +1,80 @@
+/* Hide SSA Logo */
+.app-header img {
+  display: none !important;
+}
+/* Hide Settings Images of Foxy */
+.md-card.settings .md-card-media {
+  display: none !important;
+}
+/* Hide Contact Support Team Button */
+.support .md-toolbar .md-theme-default.md-button:not([disabled]).md-primary.md-raised, 
+.support .md-toolbar .md-theme-default.md-button:not([disabled]).md-primary.md-fab {
+display: none !important;
+}
+/* Change the accent color of the admin app */
+.embed .md-theme-default.md-toolbar,
+.md-theme-default.md-toolbar,
+.md-theme-default.md-button:not([disabled]).md-primary:not(.md-icon-button),
+.md-layout .md-theme-default.md-button:not([disabled]).md-primary:not(.md-icon-button),
+.md-layout .main-settings-col .md-toolbar .md-button.router-link-active,
+.md-layout .md-layout.md-theme-light-green.md-button:not([disabled]).md-primary.md-raised,
+.md-layout .md-theme-reverse.md-switch.md-checked .md-switch-thumb,
+.md-layout .md-theme-reverse.md-switch.md-checked .md-switch-container,
+.md-layout .md-toolbar .md-button:hover:not([disabled]):not(.md-raised):not(.md-icon-button):not(.md-fab),
+.md-layout .md-theme-default.md-button:not([disabled]).md-primary.md-raised:hover,
+.md-layout .mdc-theme-name--light-green.mdc-chip,
+.md-layout .mdc-theme-name--light-green .mdc-chip__icon.mdc-chip__icon--trailing,
+.md-layout .mdc-theme-name--light-green .mdc-chip__icon.mdc-chip__icon--trailing:hover,
+.md-layout .md-theme-light-green .cov-date-monthly,
+.md-layout .md-theme-blue-grey.md-button:not([disabled]).md-primary.md-fab{
+background-color: #068C66;
+color: white;
+}
+
+.md-layout .md-card.md-theme-light-green {
+border-top: 5px solid #068C66;
+}
+
+html .md-layout .md-theme-default.md-radio.md-checked .md-radio-container {
+border-color: #068C66;
+}
+
+.md-layout .md-theme-default.md-select-content .md-menu-item.md-selected,
+.md-layout .md-theme-default.md-icon.md-primary,
+html .md-layout .md-theme-default.md-radio.md-checked .md-ink-ripple, html .md-theme-default.md-radio .md-ink-rippe,
+.md-layout .mdc-theme-name--light-green.mdc-icon-button, .mdc-theme-name--light-green .mdc-icon-button,
+.md-layout .md-theme-default.md-tabs.md-transparent>.md-tabs-navigation .md-tab-header.md-active, 
+.md-layout .md-theme-default.md-tabs.md-transparent>.md-tabs-navigation .md-tab-header:focus,
+.md-layout .md-theme-default.md-list .md-list-item .router-link-active.md-list-item-container,
+.md-layout .md-theme-default.md-list .md-list-item .router-link-active.md-list-item-container>.md-icon {
+color: #068C66;
+}
+
+html .md-layout .md-theme-default.md-checkbox.md-checked .md-checkbox-container,
+.md-layout .md-theme-default.md-checkbox.md-primary.md-checked .md-checkbox-container,
+.md-layout .md-theme-reverse.md-checkbox.md-checked .md-checkbox-container{
+background-color: #068C66;
+border-color: #068C66;
+}
+
+.md-layout .md-theme-default.md-tabs.md-transparent>.md-tabs-navigation .md-tab-indicator,
+.md-layout .ssa-booking-dialog .md-dialog .close {
+background-color: #068C66;
+}
+
+.md-layout .ssa-import-export .export-code:focus {
+border-color: #068C66;
+outline: 1px solid #068C66;
+}
+/* ————————————————————————— */
+
+/* Change the background color of the admin app */
+body {
+background: #fff;
+background-color: #fff !important;
+}
+
+
+.spa-template-default .md-button .md-fab .md-primary .md-mini .md-theme-default {
+  margin-bottom: 30px;
+}

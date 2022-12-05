@@ -133,46 +133,6 @@ function digid_custom_logo_output( $html ) {
 
 add_filter( 'get_custom_logo', 'digid_custom_logo_output', 10 );
 
-
-/**
- * Hide native posts from custom role user
- */
-function digid_hide_posts_from_custom_role() {
-
-	$user = wp_get_current_user();
-	$allowed_roles = array( 'porperty-owner' );
-
-	if ( array_intersect( $allowed_roles, $user->roles ) ) :
-		/**
-		 * Remove post type links
-		 */
-		function digid_remove_posts_type() {
-			remove_menu_page( 'edit.php' );
-		}
-
-		add_action( 'admin_menu', 'digid_remove_posts_type' );
-
-		/**
-		 * Remove "quick drafts" post from dashboard
-		 */
-		function digid_remove_posts_quickdraft() {
-			remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
-		}
-
-		add_action( 'admin_bar_menu', 'digid_remove_posts_from_menu', 9999 );
-
-		/**
-		 * Remove "New post" links
-		 */
-		function digid_remove_posts_from_menu( $wp_admin_bar ) {
-			$wp_admin_bar->remove_node( 'new-post' );
-		}
-
-		add_action( 'wp_dashboard_setup', 'digid_remove_posts_quickdraft', 9999 );
-	endif;
-
-}
-
 /*
  * Sets the post types that can appear on the homepage.
  */
@@ -218,6 +178,16 @@ function digid_exclude_menu_items() {
 }
 
 add_filter( 'admin_init', 'digid_exclude_menu_items' );
+
+/*function digid_show_current_user_attachments( $query ) {
+	$user_id = get_current_user_id(); // get current user ID
+	if ( $user_id && ! current_user_can( 'manage_options' ) ) {  // if we have a current user ID (they're logged in) and the current user is not an administrator
+		$query['author'] = $user_id; // add author filter, ensures only the current users images are displayed
+	}
+	return $query;
+}*/
+
+add_filter( 'ajax_query_attachments_args', 'digid_show_current_user_attachments' );
 
 // Theme customizer options.
 require get_template_directory() . '/inc/customizer.php';
