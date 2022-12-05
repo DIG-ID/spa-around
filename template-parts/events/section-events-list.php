@@ -62,6 +62,7 @@
 				$parent = $pod->field( 'property' );
 				if ( ! empty( $parent ) ) :
 					$parent_id = $parent['ID'];
+					$parent_name    = get_the_title( $parent_id );
 					$parent_terms = get_the_terms( $parent_id, 'location' );
 					if ( $parent_terms && ! is_wp_error( $parent_terms ) ) :
 						foreach ( $parent_terms as $pterm ) :
@@ -78,6 +79,11 @@
 							<?php endif; ?>
 							<figcaption>
 								<?php the_title( '<h2>', '</h2>' ); ?>
+								<?php
+									if ( $parent_name ) : ?>
+										<ul class="single-meta card__events-property"><li><svg xmlns="http://www.w3.org/2000/svg" width="19.778" height="19.778" viewBox="0 0 19.778 19.778"><defs><style>.a{fill:#068c66;}</style></defs><path class="a" d="M13.867,7.933h.989a.989.989,0,0,0,0-1.978h-.989a.989.989,0,0,0,0,1.978Zm0,3.956h.989a.989.989,0,0,0,0-1.978h-.989a.989.989,0,0,0,0,1.978ZM8.922,7.933h.989a.989.989,0,0,0,0-1.978H8.922a.989.989,0,0,0,0,1.978Zm0,3.956h.989a.989.989,0,0,0,0-1.978H8.922a.989.989,0,0,0,0,1.978ZM20.789,19.8H19.8V2.989A.989.989,0,0,0,18.811,2H4.967a.989.989,0,0,0-.989.989V19.8H2.989a.989.989,0,0,0,0,1.978h17.8a.989.989,0,0,0,0-1.978Zm-7.911,0H10.9V15.844h1.978Zm4.944,0H14.856V14.856a.989.989,0,0,0-.989-.989H9.911a.989.989,0,0,0-.989.989V19.8H5.956V3.978H17.822Z" transform="translate(-2 -2)"/></svg><?php echo $parent_name ?></li></ul>
+									<?php endif;
+								?>
 							</figcaption>
 						</figure>
 					</a>
