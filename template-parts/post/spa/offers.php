@@ -22,7 +22,7 @@ if ( ! empty( $parent ) ) :
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-12">
+					<div class="col-12 related-offers__col">
 						<div class="swiper related-offers-swiper">
 							<div class="swiper-wrapper">
 								<?php

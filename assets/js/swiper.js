@@ -24,7 +24,7 @@ $(function() {
           spaceBetween: 30,
         },
         1200: {
-          slidesPerView: 4.4,
+          slidesPerView: 5.2,
           spaceBetween: 30,
         },
       },
