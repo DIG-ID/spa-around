@@ -12,23 +12,23 @@ $(function() {
     var relatedOffersSwiper = new Swiper(".related-offers-swiper", {
       breakpoints: {
         576: {
-          slidesPerView: 2,
+          slidesPerView: 2.5,
           spaceBetween: 30,
         },
         768: {
-          slidesPerView: 2,
+          slidesPerView: 2.5,
           spaceBetween: 30,
         },
         992: {
-          slidesPerView: 4,
+          slidesPerView: 3.5,
           spaceBetween: 30,
         },
         1200: {
-          slidesPerView: 4,
+          slidesPerView: 4.5,
           spaceBetween: 30,
         },
       },
-      slidesPerView: 1,
+      slidesPerView: 1.4,
       spaceBetween: 30,
       pagination: {
         el: ".swiper-pagination",
