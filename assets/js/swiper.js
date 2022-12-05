@@ -12,7 +12,7 @@ $(function() {
     var relatedOffersSwiper = new Swiper(".related-offers-swiper", {
       breakpoints: {
         576: {
-          slidesPerView: 2.4,
+          slidesPerView: 1.4,
           spaceBetween: 30,
         },
         768: {
