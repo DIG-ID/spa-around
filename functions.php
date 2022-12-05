@@ -185,9 +185,9 @@ add_filter( 'admin_init', 'digid_exclude_menu_items' );
 		$query['author'] = $user_id; // add author filter, ensures only the current users images are displayed
 	}
 	return $query;
-}*/
+}
 
-add_filter( 'ajax_query_attachments_args', 'digid_show_current_user_attachments' );
+add_filter( 'ajax_query_attachments_args', 'digid_show_current_user_attachments' );*/
 
 // Theme customizer options.
 require get_template_directory() . '/inc/customizer.php';
