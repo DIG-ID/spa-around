@@ -60,7 +60,7 @@ add_filter( 'admin_footer_text', 'theme_custom_admin_footer' );*/
 function digid_theme_login_logo() {
 	echo '<style type="text/css">
 	h1 a {
-		background-image: url(' . get_template_directory_uri() . '/assets/imgs/sa-logo-green-with-locations.svg) !important;
+		background-image: url(' . get_template_directory_uri() . '/assets/imgs/sa-logo-vertical-rgb-white.svg) !important;
 	}
 	</style>';
 }
