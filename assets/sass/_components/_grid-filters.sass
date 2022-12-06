@@ -36,6 +36,57 @@
             font-size: 14px
             color: #202020
 
+.date
+    &__filter
+        &-button
+            font-family: $roc-grotesk-font
+            font-size: 14px
+            color: #6E6E6E
+            border: 2px solid #DBDBDB
+            border-radius: 20px
+            background-color: #ffffff
+            padding: 10px 15px
+            margin-right: 10px
+            margin-bottom: 20px
+            text-decoration: none
+            cursor: pointer
+            outline: 0
+            &:hover
+                color: $main-color
+                border-color: $main-color
+
+.qs-datepicker-container
+    border-radius: 8px
+    .qs-controls
+        background: $main-color
+        .qs-month-year
+            span
+                font-family: $roc-grotesk-font
+                font-size: 16px
+                font-weight: 300
+                line-height: 26px
+                letter-spacing: 0.56px
+                color: #ffffff
+        .qs-arrow.qs-left
+            &:after
+                border-right-color: #ffffff
+        .qs-arrow.qs-right
+            &:after
+                border-left-color: #ffffff
+    .qs-squares
+        .qs-day
+            color: $main-grey
+            font-size: 16px
+            font-weight: 300
+            line-height: 26px
+            letter-spacing: 0.56px
+        .qs-square
+            font-family: $roc-grotesk-font
+            &:not(.qs-empty):not(.qs-disabled):not(.qs-day):not(.qs-active):hover
+                background: $main-color
+                color: #ffffff
+
+
 .grid
     &__empty
         display: none

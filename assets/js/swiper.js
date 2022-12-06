@@ -4,6 +4,8 @@ $(function() {
 
   if ($('body').hasClass('single-spa')) {
     var spaGallerySwiper = new Swiper(".spa-gallery-swiper", {
+      slidesPerView: 1,
+      loop: true,
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",

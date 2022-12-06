@@ -27,10 +27,14 @@
                 </div>
 			</div>
 			<div class="col-12 col-lg-8">
-				<div class="button-group offer__filter-button-group filtersDate" data-filter-group="date" style="display:none;">
-					<input id="event_date_start" class="start" type="text"></input>
-					<input id="event_date_end" class="end" type="text"></input>
-					<a class="event_filter" data-filter="date"><?php _e('Filter', 'digid') ?></a>
+				<div class="button-group offer__filter-button-group filters" data-filter-group="date" style="display: none;">
+					<?php
+						$dateraw = date('d/m/Y', time());
+						$datenow = strtotime( $dateraw );
+					?>
+					<input id="event_date_start" class="start date__filter-button" type="text" placeholder="<?php echo $dateraw; ?>" data-start="<?php echo $datenow; ?>"></input>
+					<input id="event_date_end" class="end date__filter-button" type="text" placeholder="<?php echo $dateraw; ?>" data-end="<?php echo $datenow; ?>"></input>
+					<a class="event_filter spa__filter-button" data-filter="date"><span>X</span><?php _e('Filter', 'digid') ?></a>
 				</div>
 			</div>
 		</div>
@@ -108,25 +112,24 @@
 		});
 		// store filter for each group
 		var filters = [];
-
-		$('.filtersDate').on( 'click', '.event_filter', function( event ) {
-			var startdate_raw = $('#event_date_start').val();
-			var	enddate_raw = $('#event_date_end').val();
-			var startdate = $('#event_date_start').attr("data-start");
-			var enddate = $('#event_date_end').attr("data-end");
-			console.log(startdate, enddate);
-			$grid.isotope({
-				filter: function () {
-					return startdate <= $(".grid-event-item").data("startdate") && enddate > $('.grid-event-item').data("enddate");
-				}
-			});
-		});
+		var filterFns = {
+			startenddate: function() {
+				var startdate_raw = $('#event_date_start').val();
+				var	enddate_raw = $('#event_date_end').val();
+				var startdate = $('#event_date_start').attr("data-start");
+				var enddate = $('#event_date_end').attr("data-end");
+				return startdate <= $(this).data("startdate") && enddate >= $(this).data("enddate");
+			}
+		};
+		
 		$('.filters').on( 'click', 'a', function( event ) {
 			var $this = $(this);
 			var $target = $( event.currentTarget );
 			$target.toggleClass('is-checked');
 			var isChecked = $target.hasClass('is-checked');
 			var filter = $target.attr('data-filter');
+						
+			filter = filterFns[ filter ] || filter;
 			if ( isChecked ) {
 				addFilter( filter, $this );
 			} else {
@@ -166,6 +169,22 @@
 				filters.splice( index, 1 );
 			}
 		}
+
+		/*
+		$('.filtersDate').on( 'click', '.event_filter', function( event ) {
+			var startdate_raw = $('#event_date_start').val();
+			var	enddate_raw = $('#event_date_end').val();
+			var startdate = $('#event_date_start').attr("data-start");
+			var enddate = $('#event_date_end').attr("data-end");
+			console.log(startdate, enddate);
+			$grid.isotope({
+				filter: function () {
+					return startdate <= $(this).data("startdate") && enddate >= $(this).data("enddate");
+				}
+			});
+		});
+		*/
+
 	});
 })(jQuery);
 </script>

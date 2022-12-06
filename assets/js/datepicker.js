@@ -8,6 +8,8 @@ $(function() {
                 const value = date.toLocaleDateString()
                 input.value = value 
             },
+            customDays: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+            customMonths: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
             onSelect: (instance, date) => {
                 $('#event_date_start').attr('data-start',Math.floor(new Date(date).getTime() / 1000));
             },
@@ -18,6 +20,8 @@ $(function() {
                 const value = date.toLocaleDateString()
                 input.value = value 
             },
+            customDays: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+            customMonths: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
             onSelect: (instance, date) => {
                 $('#event_date_end').attr('data-end',Math.floor(new Date(date).getTime() / 1000));
             },
