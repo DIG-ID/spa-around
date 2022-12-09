@@ -8,7 +8,7 @@
 				endif;
 				?>
 			</div>
-			<div class="col-12">
+			<div class="col-12 col-md-8 col-lg-6">
 				<?php the_title( '<h1 class="section__title section-page-title__title">', '</h1>' ); ?>
 			</div>
 		</div>
