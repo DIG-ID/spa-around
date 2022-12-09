@@ -30,6 +30,7 @@
 										<p class="modal-footer__note">
 											<?php _e( 'Vor Ort wirst du an der jeweiligen Rezeption gebeten, dich mit der Hotelschlüsselkarte mit Namen oder Gästekarte zu identifizieren.', 'digid' ); ?>
 										</p>
+									</div>
 								</div>
 							</div>
 						</div>
