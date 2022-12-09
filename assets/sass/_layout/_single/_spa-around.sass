@@ -23,7 +23,7 @@
   .section__title
     margin-bottom: 40px
   .infrastructure-list
-    margin-left: 0
+    margin-left: 10px
     padding-left: 1em
     list-style: none
     columns: 2
@@ -56,6 +56,10 @@
       position: relative
       left: 0%
       width: 100vw
+
+@include media-breakpoint-down(lg)
+  .spa-gallery
+    margin-bottom: 40px
 
 @include media-breakpoint-down(md)
   .section-spa-infrastructure

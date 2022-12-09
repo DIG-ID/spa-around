@@ -1,7 +1,7 @@
 <section class="section section-intro-single section-intro-property">
 	<div class="container">
 		<div class="row justify-content-between">
-			<div class="col-12 col-md-12 col-lg-4 description property-descrition">
+			<div class="col-12 col-md-12 col-lg-4 order-2 order-lg-1 description property-descrition">
 				<?php the_field( 'property_details_description' ); ?>
 				<?php
 				$property_address = get_field( 'property_details_address' );
@@ -20,7 +20,7 @@
 				echo '</ul>';
 				?>
 			</div>
-			<div class="col-12 col-md-12 col-lg-7 property-gallery">
+			<div class="col-12 col-md-12 col-lg-7 order-1 order-lg-2 property-gallery">
 				<!-- Swiper -->
 				<div id="property-gallery" class="swiper property-gallery-swiper">
 					<div class="swiper-wrapper">
