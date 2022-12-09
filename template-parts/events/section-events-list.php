@@ -27,7 +27,7 @@
                 </div>
 			</div>
 			<div class="col-12 col-lg-8">
-				<div class="button-group offer__filter-button-group filters" data-filter-group="date" style="display: none;">
+				<div class="button-group offer__filter-button-group filtersDate" data-filter-group="date" style="display: none;">
 					<?php
 						$dateraw = date('d/m/Y', time());
 						$datenow = strtotime( $dateraw );
@@ -111,32 +111,49 @@
 		layoutMode: 'fitRows'
 		});
 		// store filter for each group
-		var filters = [];
-		var filterFns = {
-			startenddate: function() {
-				var startdate_raw = $('#event_date_start').val();
-				var	enddate_raw = $('#event_date_end').val();
-				var startdate = $('#event_date_start').attr("data-start");
-				var enddate = $('#event_date_end').attr("data-end");
-				return startdate <= $(this).data("startdate") && enddate >= $(this).data("enddate");
-			}
-		};
+		// store filter for each group
 		
-		$('.filters').on( 'click', 'a', function( event ) {
+		var filtersValue = [];
+		var filters = [];
+		var index = '';
+
+		$('.filtersDate').on( 'click', '.event_filter', function( event ) {
+			var startdate_raw = $('#event_date_start').val();
+			var	enddate_raw = $('#event_date_end').val();
+			var startdate = $('#event_date_start').attr("data-start");
+			var enddate = $('#event_date_end').attr("data-end");
+			console.log(startdate, enddate);
+			$grid.isotope({
+				filter: function () {
+					return startdate <= $(this).data("startdate") && enddate >= $(this).data("enddate");
+				}
+			});
+		});
+
+		// change is-checked class on buttons
+		$('.filters').on( 'click', 'a', function(  ) {
 			var $this = $(this);
-			var $target = $( event.currentTarget );
-			$target.toggleClass('is-checked');
-			var isChecked = $target.hasClass('is-checked');
-			var filter = $target.attr('data-filter');
-						
-			filter = filterFns[ filter ] || filter;
+			var filter = '';
+			$this.toggleClass('is-checked');
+			var isChecked = $this.hasClass('is-checked');
+
+			// get group key
+			var $buttonGroup = $this.parents('.button-group');
+			var filterGroup = $buttonGroup.attr('data-filter-group');
+			// set filter for group
+			filtersValue[ filterGroup ] = $this.attr('data-filter');
+			filter = concatValues( filtersValue );
+			
 			if ( isChecked ) {
 				addFilter( filter, $this );
 			} else {
 				removeFilter( filter );
 			}
+			// filter isotope
+			// group filters together, inclusive
 			$grid.isotope({ filter: filters.join('') });
 		});
+
 		$grid.on( 'arrangeComplete', function( event, filters ) {
 			if ( filters.length == 0 ){
 				$('.grid__empty').css('display', 'block');
@@ -144,6 +161,7 @@
 				$('.grid__empty').css('display', 'none');
 			}
 		});
+
 		function addFilter( filter, $this ) {
 			$location_button = $this.parents('.button-group');
 			if($location_button.hasClass('filters_location')){
@@ -163,28 +181,22 @@
 				}
 			}
 		}
+
 		function removeFilter( filter ) {
-			var index = filters.indexOf( filter);
+			index = filters.indexOf( filter);
 			if ( index != -1 ) {
 				filters.splice( index, 1 );
+				filtersValue = [];
 			}
 		}
-
-		/*
-		$('.filtersDate').on( 'click', '.event_filter', function( event ) {
-			var startdate_raw = $('#event_date_start').val();
-			var	enddate_raw = $('#event_date_end').val();
-			var startdate = $('#event_date_start').attr("data-start");
-			var enddate = $('#event_date_end').attr("data-end");
-			console.log(startdate, enddate);
-			$grid.isotope({
-				filter: function () {
-					return startdate <= $(this).data("startdate") && enddate >= $(this).data("enddate");
-				}
-			});
-		});
-		*/
-
+		// flatten object by concatting values
+		function concatValues( obj ) {
+			var value = '';
+			for ( var prop in obj ) {
+				value += obj[ prop ];
+			}
+			return value;
+		}
 	});
 })(jQuery);
 </script>
