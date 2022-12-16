@@ -41,6 +41,7 @@ $(function() {
 
   if ($('body').hasClass('single-property')) {
     var propertyGallerySwiper = new Swiper(".property-gallery-swiper", {
+      loop: true,
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
