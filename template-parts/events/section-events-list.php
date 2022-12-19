@@ -28,13 +28,12 @@
 				<h3 class="spa__filter-name"><?php esc_html_e( 'Date Range', 'digid' ); ?></h3>
 				<div class="button-group offer__filter-button-group filtersDate" data-filter-group="date" style="display: block;">
 					<?php
-						$dateraw = date( 'd/m/Y', time() );
+						$dateraw = gmdate( 'd/m/Y' );
 						$datenow = strtotime( $dateraw );
 					?>
 					<input id="event_date_start" class="start date__filter-button" type="text" placeholder="<?php echo $dateraw; ?>" data-start="<?php echo $datenow; ?>"></input>
 					<input id="event_date_end" class="end date__filter-button" type="text" placeholder="<?php echo $dateraw; ?>" data-end="<?php echo $datenow; ?>"></input>
 					<button class="button button--filter event_filter spa__filter-button" data-filter="dateRange"><span>X</span><?php esc_html_e( 'Filter', 'digid' ); ?></button>
-					<button class="button button--reset"><?php esc_html_e( 'Reset filters', 'digid' ); ?></button>
 				</div>
 			</div>
 		</div>
@@ -139,59 +138,39 @@
 			}
 		});
 
-
 		$('.event-filters').on( 'click', '.button', function( event ) {
 			var $this = $(this);
-
 			// get group key
 			var $buttonGroup = $this.parents('.button-group');
 			var filterGroup = $buttonGroup.attr('data-filter-group');
-			console.log('the fitler group: ' + filterGroup);
-
 			// set filter for group
 			filters[ filterGroup ] = $this.attr('data-filter');
-			console.log('the data: ' + $this.attr('data-filter'));
-
-
 			// set filter for Isotope
 			$grid.isotope();
 		});
-
-
-			/*
+/*
 		// change is-checked class on buttons
 		$('.button-group').each( function( i, buttonGroup ) {
 			var $buttonGroup = $( buttonGroup );
-			$buttonGroup.on( 'click', 'button', function( event ) {
+			$buttonGroup.on( 'cl qick', 'button', function( event ) {
 				$buttonGroup.find('.is-checked').removeClass('is-checked');
 				var $button = $( event.currentTarget );
 				$button.addClass('is-checked');
 			});
-		});
-		*/
+		});*/
+	
 
 		// change is-checked class on buttons
-		$('.button-group').on( 'click', 'a', function(  ) {
+		$('.button-group').on( 'click', 'button', function(  ) {
 			var $this = $(this);
 			var filter = '';
 			$this.toggleClass('is-checked');
 			var isChecked = $this.hasClass('is-checked');
-
-			// get group key
-		//	var $buttonGroup = $this.parents('.button-group');
-			//var filterGroup = $buttonGroup.attr('data-filter-group');
-			// set filter for group
-			//filtersValue[ filterGroup ] = $this.attr('data-filter');
-			//filter = concatValues( filtersValue );
-			
 			if ( isChecked ) {
 				addFilter( filter, $this );
 			} else {
 				removeFilter( filter );
 			}
-			// filter isotope
-			// group filters together, inclusive
-			//$grid.isotope({ filter: filters.join('') });
 		});
 
 		$grid.on( 'arrangeComplete', function( event, filters ) {
@@ -202,41 +181,40 @@
 			}
 		});
 
-		function addFilter( filter, $this ) {
+		function addFilter( filters, $this ) {
 			$location_button = $this.parents('.button-group');
 			if($location_button.hasClass('filters_location')){
-				index = filters.indexOf( filter);
-				$location_button.children('a').not($this).removeClass('is-checked');
+				index = filters.indexOf( filters);
+				$location_button.children('button').not($this).removeClass('is-checked');
 				filters.splice( index, 1 );
 				filtersValue = [];
 				if ( index == -1 ) {
-					filters.push( filter );
+					filters.push( filters );
 					filtersValue = [];
 				}
 			} else {
-				index = filters.indexOf( filter);
+				index = filters.indexOf( filters);
 				if ( index == -1 ) {
-					filters.push( filter );
+					filters.push( filters );
 					filtersValue = [];
 				}
 			}
 		}
 
-		function removeFilter( filter ) {
-			index = filters.indexOf( filter);
-			if ( index != -1 ) {
-				filters.splice( index, 1 );
-				filtersValue = [];
+		function removeFilter( filters ) {
+			
+			if($location_button.hasClass('filters_location')){
+				index = filters.indexOf( filters);
+				if ( index != -1 ) {
+					filters.splice( index, 1 );
+					filtersValue = [];
+				}
+			} else {
+				console.log('teste');
 			}
 		}
-		// flatten object by concatting values
-		function concatValues( obj ) {
-			var value = '';
-			for ( var prop in obj ) {
-				value += obj[ prop ];
-			}
-			return value;
-		}
+
+
 	});
 })(jQuery);
 </script>
