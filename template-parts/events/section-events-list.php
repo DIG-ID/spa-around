@@ -5,43 +5,43 @@
 				<p class="event__filter-title"><?php esc_html_e( 'Filter', 'digid' ); ?></p>
 			</div>
 		</div>
-		<div class="row event__filter-row">
-			<div class="col-12 col-lg-12">
-				<p class="spa__filter-name"><?php esc_html_e( 'Location', 'digid' ); ?></p>
-			</div>
-			<div class="col-12 col-lg-4">
+		<div class="row event-filters event__filter-row">
+			<div class="col-12 col-lg-4 ui-group">
+				<h3 class="spa__filter-name"><?php esc_html_e( 'Location', 'digid' ); ?></h3>
 				<div class="button-group spa__filter-button-group filters filters_location" data-filter-group="location">
 					<?php 
-						$event_locationterms = get_terms( array(
+						$event_location_terms = get_terms( array(
 							'taxonomy' => 'location',
 							'hide_empty' => false,
 						) );
-						if ( $event_locationterms && ! is_wp_error( $event_locationterms ) ) :
-							foreach ( $event_locationterms as $event_locationterm ) :
-								$event_location_slug = $event_locationterm->slug;
-								$event_location = $event_locationterm->name;
-								echo '<a class="spa__filter-button" data-filter=".' . esc_attr( $event_location_slug ) . '"><span>X</span>' . esc_html( $event_location ) . '</a>';
+						if ( $event_location_terms && ! is_wp_error( $event_location_terms ) ) :
+							foreach ( $event_location_terms as $event_location ) :
+								$event_location_slug = $event_location->slug;
+								$event_location_name = $event_location->name;
+								echo '<button class="button spa__filter-button" data-filter=".' . esc_attr( $event_location_slug ) . '"><span>X</span>' . esc_html( $event_location_name ) . '</button>';
 							endforeach;
 						endif;
 					?>
-								</div>
+				</div>
 			</div>
-			<div class="col-12 col-lg-8">
+			<div class="col-12 col-lg-8 ui-group">
+				<h3 class="spa__filter-name"><?php esc_html_e( 'Date Range', 'digid' ); ?></h3>
 				<div class="button-group offer__filter-button-group filtersDate" data-filter-group="date" style="display: block;">
 					<?php
-						$dateraw = date('d/m/Y', time());
+						$dateraw = date( 'd/m/Y', time() );
 						$datenow = strtotime( $dateraw );
 					?>
 					<input id="event_date_start" class="start date__filter-button" type="text" placeholder="<?php echo $dateraw; ?>" data-start="<?php echo $datenow; ?>"></input>
 					<input id="event_date_end" class="end date__filter-button" type="text" placeholder="<?php echo $dateraw; ?>" data-end="<?php echo $datenow; ?>"></input>
-					<a class="event_filter spa__filter-button" data-filter="date"><span>X</span><?php _e('Filter', 'digid') ?></a>
+					<button class="button button--filter event_filter spa__filter-button" data-filter="dateRange"><span>X</span><?php esc_html_e( 'Filter', 'digid' ); ?></button>
+					<button class="button button--reset"><?php esc_html_e( 'Reset filters', 'digid' ); ?></button>
 				</div>
 			</div>
 		</div>
 		<div class="grid__empty">
 			<p class="grid__empty-text"><?php esc_html_e( 'Sorry, no results', 'digid' ); ?></p>
 		</div>
-		<div class="row grid-event">
+		<div class="row grid-events">
 			<?php
 			$event_query_args = array(
 				'post_type' => 'events',
@@ -54,16 +54,8 @@
 				while ( $event_query->have_posts() ) :
 					$event_query->the_post();
 
-					//$event_date_start_raw = get_field( 'event_details_date' );
-					//$event_date_end_raw   = get_field( 'event_details_date_end' );
-
-					//$event_date_start_raw = str_replace( '/', '-', $event_date_start_raw );
-					//$event_date_end_raw   = str_replace( '/', '-', $event_date_end_raw );
-
 					$event_date_start = strtotime( get_field( 'event_details_date' ) );
 					$event_date_end   = strtotime( get_field( 'event_details_date_end' ) );
-					var_dump($event_date_start);
-					var_dump($event_date_end);
 
 					$parent_locations = array();
 
@@ -81,9 +73,8 @@
 							$parent_location = join( " ", $parent_locations );
 						endif;
 					endif;
-	
 					?>
-					<article class="col-12 col-md-4 grid-event-item <?php echo esc_attr( $parent_location ); ?>" data-start="<?php echo esc_attr( $event_date_start ); ?>" data-end="<?php echo esc_html( $event_date_end ); ?>">
+					<article class="col-12 col-md-4 event-item <?php echo esc_attr( $parent_location ); ?>" data-start="<?php echo esc_attr( $event_date_start ); ?>" data-end="<?php echo esc_html( $event_date_end ); ?>">
 						<a href="<?php the_permalink(); ?>" class="card card-link">
 							<figure>
 								<?php if ( has_post_thumbnail() ) : ?>
@@ -108,43 +99,90 @@
 <script type="text/javascript">
 (function( $ ) {
 	$(document).on( 'ready', function() {
-		// init Isotope
-		var $grid = $( '.grid-event' ).isotope({
-			itemSelector: '.grid-event-item',
-			layoutMode: 'fitRows'
-		});
 
 		// store filter for each group
-		var filtersValue = [];
-		var filters = [];
+		var filters = {};
 		var index = '';
 
-		$('.filtersDate').on( 'click', '.event_filter', function( event ) {
-			var startdate_raw = $('#event_date_start').val();
-			var	enddate_raw = $('#event_date_end').val();
-			var startdate = $('#event_date_start').attr("data-start");
-			var enddate = $('#event_date_end').attr("data-end");
-			console.log(startdate, enddate);
-			$grid.isotope({
-				filter: function () {
-					return startdate <= $(this).data("startdate") && enddate >= $(this).data("enddate");
+		var filterFns = {
+			// show item in the date range
+			dateRange: function() {
+				// use $(this) to get item element
+				var dateStart = $('#event_date_start').attr("data-start");
+				var dateEnd   = $('#event_date_end').attr("data-end");
+				return dateStart <= $(this).data('start') && dateEnd >= $(this).data('end');
+			},
+		};
+
+		// init Isotope
+		var $grid = $( '.grid-events' ).isotope({
+			itemSelector: '.event-item',
+			layoutMode: 'fitRows',
+			filter: function() {
+				var isMatched = true;
+				var $this = $(this);
+
+				for ( var prop in filters ) {
+					var filter = filters[ prop ];
+					// use function if it matches
+					filter = filterFns[ filter ] || filter;
+					// test each filter
+					if ( filter ) {
+						isMatched = isMatched && $(this).is( filter );
+					}
+					// break if not matched
+					if ( !isMatched ) {
+						break;
+					}
 				}
-			});
+				return isMatched;
+			}
 		});
 
+
+		$('.event-filters').on( 'click', '.button', function( event ) {
+			var $this = $(this);
+
+			// get group key
+			var $buttonGroup = $this.parents('.button-group');
+			var filterGroup = $buttonGroup.attr('data-filter-group');
+			console.log('the fitler group: ' + filterGroup);
+
+			// set filter for group
+			filters[ filterGroup ] = $this.attr('data-filter');
+			console.log('the data: ' + $this.attr('data-filter'));
+
+
+			// set filter for Isotope
+			$grid.isotope();
+		});
+
+
+			/*
 		// change is-checked class on buttons
-		$('.filters').on( 'click', 'a', function(  ) {
+		$('.button-group').each( function( i, buttonGroup ) {
+			var $buttonGroup = $( buttonGroup );
+			$buttonGroup.on( 'click', 'button', function( event ) {
+				$buttonGroup.find('.is-checked').removeClass('is-checked');
+				var $button = $( event.currentTarget );
+				$button.addClass('is-checked');
+			});
+		});
+		*/
+
+		// change is-checked class on buttons
+		$('.button-group').on( 'click', 'a', function(  ) {
 			var $this = $(this);
 			var filter = '';
 			$this.toggleClass('is-checked');
 			var isChecked = $this.hasClass('is-checked');
 
 			// get group key
-			var $buttonGroup = $this.parents('.button-group');
-			var filterGroup = $buttonGroup.attr('data-filter-group');
+		//	var $buttonGroup = $this.parents('.button-group');
+			//var filterGroup = $buttonGroup.attr('data-filter-group');
 			// set filter for group
-			filtersValue[ filterGroup ] = $this.attr('data-filter');
-			filter = concatValues( filtersValue );
+			//filtersValue[ filterGroup ] = $this.attr('data-filter');
+			//filter = concatValues( filtersValue );
 			
 			if ( isChecked ) {
 				addFilter( filter, $this );
@@ -153,7 +191,7 @@
 			}
 			// filter isotope
 			// group filters together, inclusive
-			$grid.isotope({ filter: filters.join('') });
+			//$grid.isotope({ filter: filters.join('') });
 		});
 
 		$grid.on( 'arrangeComplete', function( event, filters ) {
