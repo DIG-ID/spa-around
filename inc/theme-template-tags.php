@@ -134,7 +134,7 @@ function digid_get_custom_single_post_meta() {
 
 			$meta_content = '<ul class="single-meta event-meta">';
 			if ( $event_date ) :
-				$meta_content .= '<li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19"><defs><style>.a{fill:#50ae94;}</style></defs><path class="a" d="M21 5h-4V4c0-.5-.5-1-1-1s-1 .5-1 1v1H9V4c0-.5-.5-1-1-1s-1 .5-1 1v1H3c-.5 0-1 .5-1 1v15c0 .5.5 1 1 1h18c.5 0 1-.5 1-1V6c0-.5-.5-1-1-1zm-1 15H4v-8h16v8zm0-10H4V7h3v1c0 .5.5 1 1 1s1-.5 1-1V7h6v1c0 .5.5 1 1 1s1-.5 1-1V7h3v3z" transform="translate(-2 -3)"/></svg>' . date( 'Ymd', $event_date ) . '</li>';
+				$meta_content .= '<li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19"><defs><style>.a{fill:#50ae94;}</style></defs><path class="a" d="M21 5h-4V4c0-.5-.5-1-1-1s-1 .5-1 1v1H9V4c0-.5-.5-1-1-1s-1 .5-1 1v1H3c-.5 0-1 .5-1 1v15c0 .5.5 1 1 1h18c.5 0 1-.5 1-1V6c0-.5-.5-1-1-1zm-1 15H4v-8h16v8zm0-10H4V7h3v1c0 .5.5 1 1 1s1-.5 1-1V7h6v1c0 .5.5 1 1 1s1-.5 1-1V7h3v3z" transform="translate(-2 -3)"/></svg>' . gmdate( 'd/mY', strtotime( $event_date ) ) . '</li>';
 			endif;
 			if ( $event_duration ) :
 				$meta_content .= '<li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><defs><style>.a{fill:#50ae94;}</style></defs><g transform="translate(-2 -2)"><path class="a" d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"/><path class="a" d="M15,11H13V7a1,1,0,0,0-2,0v5a1,1,0,0,0,1,1h3a1,1,0,0,0,0-2Z"/></g></svg>' . $event_duration . '</li>';
