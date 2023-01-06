@@ -99,8 +99,9 @@
 (function( $ ) {
 	$(document).on( 'ready', function() {
 
-		// store filter for each group
+		// store filter
 		var filters = {};
+		var filter = [];
 		var index = '';
 
 		var filterFns = {
@@ -147,26 +148,10 @@
 			filters[ filterGroup ] = $this.attr('data-filter');
 			// set filter for Isotope
 			$grid.isotope();
-		});
-/*
-		// change is-checked class on buttons
-		$('.button-group').each( function( i, buttonGroup ) {
-			var $buttonGroup = $( buttonGroup );
-			$buttonGroup.on( 'cl qick', 'button', function( event ) {
-				$buttonGroup.find('.is-checked').removeClass('is-checked');
-				var $button = $( event.currentTarget );
-				$button.addClass('is-checked');
-			});
-		});*/
-	
 
-		// change is-checked class on buttons
-		$('.button-group').on( 'click', 'button', function(  ) {
-			var $this = $(this);
-			var filter = '';
 			$this.toggleClass('is-checked');
-			var isChecked = $this.hasClass('is-checked');
-			if ( isChecked ) {
+
+			if ( $this.hasClass('is-checked') ) {
 				addFilter( filter, $this );
 			} else {
 				removeFilter( filter );
@@ -181,36 +166,38 @@
 			}
 		});
 
-		function addFilter( filters, $this ) {
+		function addFilter( filter, $this ) {
 			$location_button = $this.parents('.button-group');
 			if($location_button.hasClass('filters_location')){
-				index = filters.indexOf( filters);
 				$location_button.children('button').not($this).removeClass('is-checked');
-				filters.splice( index, 1 );
+				index = filter.indexOf(filters);
+				filter.splice( index, 1 );
 				filtersValue = [];
 				if ( index == -1 ) {
-					filters.push( filters );
+					filter.push( filters );
 					filtersValue = [];
 				}
 			} else {
-				index = filters.indexOf( filters);
+				index = filter.indexOf(filters);
 				if ( index == -1 ) {
-					filters.push( filters );
+					filter.push( filters );
 					filtersValue = [];
 				}
 			}
 		}
 
-		function removeFilter( filters ) {
-			
+		function removeFilter( filter ) {
 			if($location_button.hasClass('filters_location')){
-				index = filters.indexOf( filters);
+				index = filter.indexOf(filters);
 				if ( index != -1 ) {
-					filters.splice( index, 1 );
+					filter.splice( index, 1 );
 					filtersValue = [];
 				}
-			} else {
-				console.log('teste');
+			} else if ($location_button.hasClass('filtersDate')) {
+				// remove date range filter from filters object
+				filters.date = null;
+				// update isotope layout to apply updated filters
+				$grid.isotope();
 			}
 		}
 
