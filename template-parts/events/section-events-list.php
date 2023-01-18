@@ -42,11 +42,19 @@
 		</div>
 		<div class="row grid-events">
 			<?php
+			$today = gmdate( 'Ymd' );
 			$event_query_args = array(
-				'post_type' => 'events',
-				'nopaging'  => true,
-				'orderby'   => 'date',
-				'order'     => 'ASC',
+				'post_type'  => 'events',
+				'nopaging'   => true,
+				'orderby'    => 'meta_value_num',
+				'order'      => 'ASC',
+				'meta_query' => array(
+					array(
+						'key'     => 'event_details_date',
+						'compare' => '>=',
+						'value'   => $today,
+					),
+				),
 			);
 			$event_query = new WP_Query( $event_query_args );
 			if ( $event_query->have_posts() ) :
