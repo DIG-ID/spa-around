@@ -14,7 +14,10 @@ mix
 
   .disableNotifications()
   .browserSync({
-    proxy: "spa-around.digid",
+    proxy: {
+      target: "http://spa-around.digid",
+      ws: true
+    },
     files: ["./**/*.php", "./dist/*.js", "./dist/*.css"]
   });
 

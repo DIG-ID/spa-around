@@ -1,5 +1,21 @@
 .section-page-header
-  min-height: 400px
+  height: 400px
+  position: relative
+  overflow: hidden
+  &::after
+    content: ''
+    display: block
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: rgba(15, 32, 28, 0.5)
+  img
+    max-width: 100%
+    width: 100%
+    height: 100%
+    object-fit: cover
 
 .section-page-title
   padding-top: 60px
