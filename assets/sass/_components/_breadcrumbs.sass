@@ -5,8 +5,10 @@
   margin-bottom: 40px
   color: #747474
   span
-    display: inline-block
+    display: flex
     > span
+      display: block
+      margin-right: 8px
       > span
         margin: 0 5px
   .breadcrumb_last
@@ -15,8 +17,7 @@
     text-overflow: ellipsis
     max-width: 250px
     width: 110px
-    height: 13px
-    margin-bottom: -3px
+    margin-left: 8px
   a
     display: inline-block
     font-family: 'Roboto', sans-serif
@@ -28,3 +29,7 @@
     margin-right: 5px
     &:hover
       color: $main-color
+
+@include media-breakpoint-down(md)
+  #breadcrumbs
+    margin-bottom: 50px
