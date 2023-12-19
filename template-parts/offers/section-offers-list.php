@@ -66,21 +66,25 @@
 				$parent_locations = array();				
 				$pod    = pods( 'offer', get_the_id() );
 				$parent = $pod->field( 'property' );
+				$parent_id = '';
 				if ( ! empty( $parent ) ) :
 					$parent_id = $parent['ID'];
 					$parent_name    = get_the_title( $parent_id );
 					$parent_terms = get_the_terms( $parent_id, 'location' );
 					$offer_terms = get_the_terms( $post->ID, 'category' );
-					$filter_classes = array_merge($parent_terms,$offer_terms);
-					if ( $filter_classes && ! is_wp_error( $filter_classes ) ) :
-						foreach ( $filter_classes as $fterm ) :
-							$parent_locations[] = $fterm->slug;
-						endforeach;
-					$parent_location = join( " ", $parent_locations );
-					endif;
+					
+					if ( is_array( $offer_terms ) ) {
+						$filter_classes = array_merge( $parent_terms, $offer_terms );
+						
+						if ( $filter_classes && ! is_wp_error( $filter_classes ) ) {
+							foreach ( $filter_classes as $fterm ) {
+								$parent_locations[] = $fterm->slug;
+							}
+							$parent_location = join( " ", $parent_locations );
+						}
+					}
 				endif; ?>
 				<article class="col-12 col-md-4 grid-offer-item <?php echo esc_html( $parent_location ); ?>">
-					
 					<a href="<?php the_permalink(); ?>" class="card card-link">
 						<figure>
 							<?php if ( has_post_thumbnail() ) : ?>
@@ -100,6 +104,7 @@
 				wp_reset_postdata();
 			endif;
 			?>
+		</div>
 	</div>
 </section>
 
