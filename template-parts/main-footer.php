@@ -28,7 +28,7 @@
 					?>
 				</div>
 				<div class="col-12 col-sm-12 col-md-6 col-lg-3 destination-logo">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/logo-flimslaax.svg' ); ?> " alt="logo flims laax">
+					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/imgs/FLIMSLAAX.min.svg' ); ?> " alt="logo flims laax">
 				</div>
 			</div><!-- .row -->
 		</div><!-- .container -->
