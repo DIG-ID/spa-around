@@ -17,7 +17,8 @@
 	</head>
 
 	<body <?php body_class(); ?>>
+		<?php do_action( 'wp_body_open' ); ?>
+		<a class="skip-link" href="#main-content"><?php esc_html_e( 'Skip to main content', 'digid' ); ?></a>
 		<?php
-		do_action( 'wp_body_open' );
 		get_template_part( 'template-parts/main', 'header' );
 		?>

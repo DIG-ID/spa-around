@@ -1,0 +1,24 @@
+// Skip to main content — keyboard-only, slides down on :focus
+.skip-link
+  position: fixed
+  top: 0
+  left: 50%
+  transform: translate(-50%, -100%)
+  z-index: 9999
+  background-color: $main-color
+  color: #fff
+  font-family: $roc-grotesk-font
+  font-size: 18px
+  font-weight: 500
+  letter-spacing: 0.36px
+  text-transform: uppercase
+  text-decoration: none
+  border-radius: 0 0 18px 18px
+  padding: 15px 60px
+  transition: transform .3s ease-in-out
+  &:focus,
+  &:focus-visible
+    transform: translate(-50%, 0)
+    outline: 2px solid $dark-color
+    outline-offset: 3px
+    color: #fff
