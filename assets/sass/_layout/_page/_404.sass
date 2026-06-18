@@ -1,0 +1,36 @@
+.section-error-page-not-found
+  position: relative
+  background: $main-color
+  background: linear-gradient(130deg, rgba(6,149,109,1) 0%, rgba(3,114,83,1) 100%)
+  z-index: 1
+  height: calc(100vh - 274px)
+  display: flex
+  align-items: center
+  justify-content: center
+  &::after
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    display: block
+    opacity: 0.3
+    z-index: -1
+    background:
+      image: url( '../../../imgs/mountains-bg.svg' )
+      position: center 100px
+      repeat: no-repeat
+      size: cover
+  &__title
+    font-size: 240px
+    font-weight: 700
+    line-height: 240px
+  p
+    font-family: $roc-grotesk-font
+    font-size: 16px
+    font-weight: 300
+    line-height: 26px
+    letter-spacing: 0.56px
+    color: #fff
+    margin-bottom: 40px
