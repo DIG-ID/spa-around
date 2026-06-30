@@ -47,16 +47,6 @@
 						?>
 					</p>
 				</div>
-				<div class="col-12 col-md-4">
-					<p class="developed-by">
-						<?php
-						printf(
-							esc_html__( 'Developed by: %s', 'digid' ),
-							'<a href="' . esc_url( __( 'https://dig.id/', 'digid' ) ) . '">dig.id</a>'
-						);
-						?>
-					</p>
-				</div>
 			</div>
 		</div>
 	</section>
